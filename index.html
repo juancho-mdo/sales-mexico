@@ -175,6 +175,38 @@ tr:hover td{background:#fafbff;}
   .page{padding:16px;}
   .header,.tab-bar{padding-left:16px;padding-right:16px;}
 }
+
+/* TEAM GOALS */
+.team-goals-section{background:var(--card);border-radius:12px;padding:22px 26px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.08);border:1px solid var(--border);}
+.team-goals-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.team-goals-title{font-size:.82rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.team-goals-total{font-size:.8rem;color:var(--muted);}
+.team-rows{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.team-row{background:#f8f9fc;border-radius:10px;padding:16px 18px;border:1px solid var(--border);}
+.team-row-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.team-name{font-size:.9rem;font-weight:700;}
+.team-name.enterprise{color:#0052cc;}
+.team-name.territorio{color:#00875a;}
+.team-pct{font-size:1rem;font-weight:700;}
+.team-bar-bg{background:var(--bg);border-radius:6px;height:10px;overflow:hidden;margin-bottom:6px;}
+.team-bar-fill{height:100%;border-radius:6px;}
+.team-bar-enterprise{background:linear-gradient(90deg,#0052cc,#00b8d9);}
+.team-bar-territorio{background:linear-gradient(90deg,#00875a,#36b37e);}
+.team-meta{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);}
+/* VENDOR QUOTA */
+.vendor-quota-bar{margin-top:12px;padding:14px 18px;background:#f8f9fc;border-radius:10px;border:1px solid var(--border);}
+.vq-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.vq-title{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.vq-pct{font-size:.9rem;font-weight:700;}
+.vq-bar-bg{background:#e0e0e0;border-radius:5px;height:8px;overflow:hidden;margin-bottom:4px;}
+.vq-bar-fill{height:100%;border-radius:5px;}
+.vq-labels{display:flex;justify-content:space-between;font-size:.69rem;color:var(--muted);}
+.team-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.71rem;font-weight:600;margin-left:10px;}
+.team-badge.enterprise{background:#e9f0ff;color:#0052cc;}
+.team-badge.territorio{background:#e3fcef;color:#006644;}
+.vkpi.vkpi-quota{border-top:2px solid #0052cc;background:#f0f5ff;}
+@media(max-width:700px){.team-rows{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -231,6 +263,38 @@ tr:hover td{background:#fafbff;}
       <span><strong>$95,000 objetivo</strong></span>
     </div>
   </div>
+
+  <div class="team-goals-section">
+    <div class="team-goals-header">
+      <span class="team-goals-title">Desglose por Equipo — Objetivo Q2</span>
+      <span class="team-goals-total">Total: $95,000 USD</span>
+    </div>
+    <div class="team-rows">
+      <div class="team-row">
+        <div class="team-row-header">
+          <span class="team-name enterprise">🏢 Enterprise</span>
+          <span class="team-pct" style="color:#0052cc">46.1%</span>
+        </div>
+        <div class="team-bar-bg"><div class="team-bar-fill team-bar-enterprise" style="width:46.1%"></div></div>
+        <div class="team-meta">
+          <span>Forecast: <strong>$26,747</strong></span>
+          <span>Objetivo: <strong>$58,000</strong> · Brecha: $31,253</span>
+        </div>
+      </div>
+      <div class="team-row">
+        <div class="team-row-header">
+          <span class="team-name territorio">🗺️ Territorio</span>
+          <span class="team-pct" style="color:#00875a">16.7%</span>
+        </div>
+        <div class="team-bar-bg"><div class="team-bar-fill team-bar-territorio" style="width:16.7%"></div></div>
+        <div class="team-meta">
+          <span>Forecast: <strong>$6,197</strong></span>
+          <span>Objetivo: <strong>$37,000</strong> · Brecha: $30,803</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="bottom-grid">
     <div class="month-cards">
@@ -1303,13 +1367,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">AM</div>
           <div>
-            <h2>Agustín Merli </h2>
+            <h2>Agustín Merli <span class="team-badge enterprise">Enterprise</span></h2>
             <p class="vendor-sub">16 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$35,550</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$17,525</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">100%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">8</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">2</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1317,6 +1382,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#006644">100% — $17,525 / $12,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:100%;background:#36b37e"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $12,000</span><span>Brecha: $0</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -1561,13 +1635,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">AT</div>
           <div>
-            <h2>Andrea Teele Vera </h2>
+            <h2>Andrea Teele Vera <span class="team-badge territorio">Territorio</span></h2>
             <p class="vendor-sub">1 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$0</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$0</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.0%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi "><div class="vkpi-val">0</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1575,6 +1650,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#bf2600">0.0% — $0 / $4,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $4,000</span><span>Brecha: $4,000</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -1636,13 +1720,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">FM</div>
           <div>
-            <h2>Fernando Mena </h2>
+            <h2>Fernando Mena <span class="team-badge enterprise">Enterprise</span></h2>
             <p class="vendor-sub">11 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$11,500</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$4,680</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">39.0%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">4</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1650,6 +1735,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#bf2600">39.0% — $4,680 / $12,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:39.0%;background:#ff5630"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $12,000</span><span>Brecha: $7,320</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -1839,13 +1933,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">FL</div>
           <div>
-            <h2>Florencia Lara </h2>
+            <h2>Florencia Lara <span class="team-badge enterprise">Enterprise</span></h2>
             <p class="vendor-sub">14 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$6,195</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,517</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">36.0%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">4</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">6</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1853,6 +1948,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#bf2600">36.0% — $2,517 / $7,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:36.0%;background:#ff5630"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $7,000</span><span>Brecha: $4,483</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -2075,13 +2179,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">GV</div>
           <div>
-            <h2>Gilberto Vázquez </h2>
+            <h2>Gilberto Vázquez <span class="team-badge territorio">Territorio</span></h2>
             <p class="vendor-sub">16 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$5,950</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,775</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">34.7%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">10</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -2089,6 +2194,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#bf2600">34.7% — $2,775 / $8,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:34.7%;background:#ff5630"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $8,000</span><span>Brecha: $5,225</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -2333,13 +2447,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">JC</div>
           <div>
-            <h2>Jorge Cervera </h2>
+            <h2>Jorge Cervera <span class="team-badge enterprise">Enterprise</span></h2>
             <p class="vendor-sub">11 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$4,050</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,025</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">13.5%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">4</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">4</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -2347,6 +2462,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#bf2600">13.5% — $2,025 / $15,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:13.5%;background:#ff5630"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $15,000</span><span>Brecha: $12,975</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
@@ -2697,13 +2821,14 @@ tr:hover td{background:#fafbff;}
         <div class="vendor-title">
           <div class="vendor-avatar-lg ">PF</div>
           <div>
-            <h2>Patricio Fernández </h2>
+            <h2>Patricio Fernández <span class="team-badge territorio">Territorio</span></h2>
             <p class="vendor-sub">22 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$6,350</div><div class="vkpi-label">Pipeline</div></div>
           <div class="vkpi"><div class="vkpi-val">$3,422</div><div class="vkpi-label">Pond.</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">42.8%</div><div class="vkpi-label">Cuota Q2</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">11</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -2711,6 +2836,15 @@ tr:hover td{background:#fafbff;}
         </div>
       </div>
       
+      
+      <div class="vendor-quota-bar">
+        <div class="vq-header">
+          <span class="vq-title">Avance vs Cuota Q2</span>
+          <span class="vq-pct" style="color:#974900">42.8% — $3,422 / $8,000</span>
+        </div>
+        <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:42.8%;background:#ff991f"></div></div>
+        <div class="vq-labels"><span>$0</span><span>Cuota: $8,000</span><span>Brecha: $4,578</span></div>
+      </div>
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
