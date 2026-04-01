@@ -215,6 +215,11 @@ tr:hover td{background:#fafbff;}
 .vkpi.vkpi-quota{border-top:2px solid #0052cc;background:#f0f5ff;}
 @media(max-width:700px){.team-rows{grid-template-columns:1fr;}}
 
+
+/* TIPO column */
+.badge-vw{background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700;}
+.badge-pipe{background:#f4f5f7;color:#505f79;border:1px solid #dfe1e6;}
+
 </style>
 </head>
 <body>
@@ -237,45 +242,83 @@ tr:hover td{background:#fafbff;}
 
 <!-- ===== OVERVIEW PAGE ===== -->
 <div class="page active" id="overview">
-  <div class="kpi-grid">
+    <div class="kpi-grid">
     <div class="kpi-card highlight">
-      <div class="kpi-label">Pipeline Total Q2</div>
-      <div class="kpi-value">$128,353</div>
-      <div class="kpi-sub">138 negocios en proceso</div>
+      <div class="kpi-label">🏆 Close Won Q2</div>
+      <div class="kpi-value">$0</div>
+      <div class="kpi-sub">Objetivo: $95,000 · 0% completado</div>
     </div>
-    <div class="kpi-card success">
-      <div class="kpi-label">Forecast Ponderado</div>
-      <div class="kpi-value">$56,415</div>
-      <div class="kpi-sub">Ajustado por probabilidad</div>
-    </div>
-    <div class="kpi-card warning">
-      <div class="kpi-label">Objetivo Q2</div>
-      <div class="kpi-value">$95,000</div>
-      <div class="kpi-sub">Meta comercial México</div>
+    <div class="kpi-card" style="border-top:3px solid #6554c0">
+      <div class="kpi-label">⭐ Verbal Win</div>
+      <div class="kpi-value" style="color:#6554c0">$2,790</div>
+      <div class="kpi-sub">Etapas RA&amp;D + Validación Interna</div>
     </div>
     <div class="kpi-card accent">
-      <div class="kpi-label">% vs Objetivo (Forecast)</div>
-      <div class="kpi-value">59.4%</div>
-      <div class="kpi-sub">Brecha: $38,585</div>
+      <div class="kpi-label">📦 Pipeline Activo</div>
+      <div class="kpi-value">$84,113</div>
+      <div class="kpi-sub">Discovery · Qualified · Negotiation</div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-label">Total Forecast vs Objetivo 2x</div>
+      <div class="kpi-value">45.7%</div>
+      <div class="kpi-sub">$86,903 / $190,000 · Brecha: $103,097</div>
+    </div>
+  </div>
+    <div class="kpi-card" style="border-top:3px solid #6554c0">
+      <div class="kpi-label">⭐ Verbal Win</div>
+      <div class="kpi-value" style="color:#6554c0">$2,790.0</div>
+      <div class="kpi-sub">Etapas RA&amp;D + Validación Interna</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">📦 Pipeline Activo</div>
+      <div class="kpi-value">$84,113</div>
+      <div class="kpi-sub">Discovery · Qualified · Negotiation</div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-label">Total Forecast vs Objetivo 2x</div>
+      <div class="kpi-value">67.6%</div>
+      <div class="kpi-sub">$128,353.25 / $190,000 · Brecha: $61,646.75</div>
     </div>
   </div>
 
-  <div class="progress-section">
+    <div class="progress-section">
     <div class="progress-header">
-      <span class="progress-title">Forecast Ponderado hacia Objetivo Q2</span>
-      <span class="progress-pct">59.4% — $56,415 / $95,000</span>
+      <span class="progress-title">🏆 Close Won vs Objetivo Q2</span>
+      <span class="progress-pct" style="color:#bf2600">0% — $0 / $95,000</span>
     </div>
-    <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-    <div class="progress-labels">
-      <span>$0</span><span>$23,750</span><span>$47,500</span><span>$71,250</span>
-      <span><strong>$95,000 objetivo</strong></span>
+    <div class="progress-bar-bg" style="height:16px"><div class="progress-bar-fill" style="width:0%;background:#36b37e"></div></div>
+    <div class="progress-labels"><span>$0</span><span>$23,750</span><span>$47,500</span><span>$71,250</span><span><strong>$95,000 objetivo</strong></span></div>
+  </div>
+  <div class="progress-section" style="margin-top:-12px">
+    <div class="progress-header">
+      <span class="progress-title">📊 Forecast Activo (VW + Pipeline) vs Objetivo 2x</span>
+      <span class="progress-pct">45.7% — $86,903 / $190,000</span>
+    </div>
+    <div style="display:flex;gap:2px;border-radius:8px;overflow:hidden;height:14px;background:#f0f0f0">
+      <div style="width:1.5%;background:#6554c0;min-width:1px" title="Verbal Win: $2,790"></div>
+      <div style="width:44.3%;background:#00b8d9;min-width:1px" title="Pipeline: $84,113"></div>
+    </div>
+    <div class="progress-labels" style="margin-top:4px">
+      <span><span style="color:#6554c0">■</span> VW: $2,790</span>
+      <span><span style="color:#00b8d9">■</span> Pipeline: $84,113</span>
+      <span><strong>Objetivo: $190,000</strong> · Brecha: $103,097</span>
+    </div>
+  </div>
+    <div style="display:flex;gap:2px;border-radius:8px;overflow:hidden;height:14px;background:#f0f0f0">
+      <div style="width:1.5%;background:#6554c0;min-width:1px" title="Verbal Win: $2,790.0"></div>
+      <div style="width:44.3%;background:#00b8d9;min-width:1px" title="Pipeline: $84,113"></div>
+    </div>
+    <div class="progress-labels" style="margin-top:4px">
+      <span><span style="color:#6554c0">■</span> VW: $2,790.0</span>
+      <span><span style="color:#00b8d9">■</span> Pipeline: $84,113</span>
+      <span><strong>Objetivo: $190,000</strong> &nbsp;·&nbsp; Brecha: $61,646.75</span>
     </div>
   </div>
 
-  <div class="team-goals-section">
+    <div class="team-goals-section">
     <div class="team-goals-header">
       <span class="team-goals-title">Desglose por Equipo — Objetivo Q2</span>
-      <span class="team-goals-total">Total: $95,000 USD · Q2 inicia el 1 de Abril</span>
+      <span class="team-goals-total">Total: $95,000 · Objetivo Forecast 2x: $190,000</span>
     </div>
     <div class="team-rows">
       <div class="team-row">
@@ -283,18 +326,22 @@ tr:hover td{background:#fafbff;}
           <span class="team-name enterprise">🏢 Enterprise</span>
           <span style="font-size:.8rem;color:var(--muted)">Objetivo: <strong style="color:#0052cc">$58,000</strong></span>
         </div>
-        <div style="margin-bottom:8px">
-          <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:3px">
-            <span>🏆 Close Won</span><span style="font-weight:700;color:#bf2600">$0 / $58,000 (0%)</span>
+        <div style="margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:3px">
+            <span style="color:var(--muted)">🏆 Close Won</span><span style="font-weight:700;color:#bf2600">$0 / $58,000 (0%)</span>
           </div>
-          <div class="team-bar-bg"><div class="team-bar-fill team-bar-enterprise" style="width:0%"></div></div>
+          <div style="background:#e0e0e0;border-radius:5px;height:7px"><div style="width:0%;height:100%;border-radius:5px;background:#36b37e"></div></div>
         </div>
         <div>
-          <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:3px">
-            <span>📊 Cobertura Pipeline<span class="coverage-chip chip-danger">1.0x</span></span><span style="font-weight:700;color:#974900">$57,295 pipeline vs $58,000 cuota</span>
+          <div style="display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:3px">
+            <span style="color:var(--muted)">📊 Forecast vs 2x ($116k)</span>
+            <span style="font-weight:700;color:#bf2600">41.1%</span>
           </div>
-          <div class="team-bar-bg"><div class="team-bar-fill" style="width:24.7%;background:#ff991f"></div></div>
-          <div style="font-size:.68rem;color:var(--muted);margin-top:2px">Pipeline actual / (4× objetivo) — objetivo: 4x</div>
+          <div style="display:flex;gap:2px;border-radius:6px;overflow:hidden;height:10px;background:#e0e0e0"><div style="width:0.2%;background:#6554c0"></div><div style="width:40.9%;background:#00b8d9"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:2px">
+            <span><span style="color:#6554c0">■</span> VW: $195 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $47,500</span>
+            <span>Total: $47,695 / $116,000 · Brecha: $68,305</span>
+          </div>
         </div>
       </div>
       <div class="team-row">
@@ -302,18 +349,22 @@ tr:hover td{background:#fafbff;}
           <span class="team-name territorio">🗺️ Territorio</span>
           <span style="font-size:.8rem;color:var(--muted)">Objetivo: <strong style="color:#00875a">$37,000</strong></span>
         </div>
-        <div style="margin-bottom:8px">
-          <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:3px">
-            <span>🏆 Close Won</span><span style="font-weight:700;color:#bf2600">$0 / $37,000 (0%)</span>
+        <div style="margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:3px">
+            <span style="color:var(--muted)">🏆 Close Won</span><span style="font-weight:700;color:#bf2600">$0 / $37,000 (0%)</span>
           </div>
-          <div class="team-bar-bg"><div class="team-bar-fill team-bar-territorio" style="width:0%"></div></div>
+          <div style="background:#e0e0e0;border-radius:5px;height:7px"><div style="width:0%;height:100%;border-radius:5px;background:#36b37e"></div></div>
         </div>
         <div>
-          <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:3px">
-            <span>📊 Cobertura Pipeline<span class="coverage-chip chip-danger">0.3x</span></span><span style="font-weight:700;color:#bf2600">$12,300 pipeline vs $37,000 cuota</span>
+          <div style="display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:3px">
+            <span style="color:var(--muted)">📊 Forecast vs 2x ($74k)</span>
+            <span style="font-weight:700;color:#bf2600">15.3%</span>
           </div>
-          <div class="team-bar-bg"><div class="team-bar-fill" style="width:8.3%;background:#ff5630"></div></div>
-          <div style="font-size:.68rem;color:var(--muted);margin-top:2px">Pipeline actual / (4× objetivo) — objetivo: 4x</div>
+          <div style="display:flex;gap:2px;border-radius:6px;overflow:hidden;height:10px;background:#e0e0e0"><div style="width:1.1%;background:#6554c0"></div><div style="width:14.2%;background:#00b8d9"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:2px">
+            <span><span style="color:#6554c0">■</span> VW: $825 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $10,475</span>
+            <span>Total: $11,300 / $74,000 · Brecha: $62,700</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1392,13 +1443,14 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">AM</div>
           <div>
             <h2>Agustín Merli <span class="team-badge enterprise">Enterprise</span></h2>
-            <p class="vendor-sub">16 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">15 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
-          <div class="vkpi"><div class="vkpi-val">$35,550</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi"><div class="vkpi-val">$34,300</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$17,525</div><div class="vkpi-label">Pond.</div></div>
-          <div class="vkpi vkpi-quota"><div class="vkpi-val">2.96x</div><div class="vkpi-label">Cobertura</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">2.86x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">8</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">2</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1411,19 +1463,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $12,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $12,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-warn">3.0x</span></span>
-            <span class="vq-section-val" style="color:#974900">objetivo: 4x cuota = $48,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#006644">142.9% — $34,300 / $24,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:74.1%;background:#ff991f"></div></div>
-          <div class="vq-meta">$35,550 pipeline actual &nbsp;·&nbsp; necesita $48,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:0.0%;background:#6554c0"></div>
+            <div style="width:142.9%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $0 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $34,300</span>
+            <span>Brecha: $0</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -1441,11 +1499,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:12%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">2 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:6%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">1 deals · $1,250</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -1460,9 +1514,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-82927304','all',this)">Todos (16)</button>
+              <button class="pill active" onclick="filterRisk('vendor-82927304','all',this)">Todos (15)</button>
               <button class="pill pill-red" onclick="filterRisk('vendor-82927304','high',this)">Riesgo Alto (8)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-82927304','medium',this)">Riesgo Medio (2)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-82927304','medium',this)">Riesgo Medio (7)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -1477,7 +1531,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -1487,7 +1541,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-urgent">2026-04-14</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-warn">19d atrás</span></td>
           <td class="next-act">—</td>
@@ -1498,7 +1552,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-18</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -1509,7 +1563,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-18</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="risk-tag red">Sin contacto</span></td>
           <td class="next-act">—</td>
@@ -1520,7 +1574,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-18</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -1531,29 +1585,18 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-18</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-high">Alto</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 18d</span> <span class="risk-tag yellow">Etapa temprana</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46557832268" target="_blank" class="deal-link">Market Expansion Group</a></td>
-          <td>$1,250</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-soon">2026-04-20</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$375</td>
-          <td><span class="contact-danger">29d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">29d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 20d</span></td>
-        </tr><tr data-risk="high">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46557892916" target="_blank" class="deal-link">Kärcher</a></td>
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-20</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -1564,7 +1607,7 @@ tr:hover td{background:#fafbff;}
           <td>$2,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,000</td>
           <td><span class="risk-tag red">Sin contacto</span></td>
           <td class="next-act">—</td>
@@ -1575,7 +1618,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-11</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -1586,7 +1629,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-23</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">34d atrás</span></td>
           <td class="next-act">—</td>
@@ -1597,7 +1640,7 @@ tr:hover td{background:#fafbff;}
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -1608,7 +1651,7 @@ tr:hover td{background:#fafbff;}
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-23</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -1619,7 +1662,7 @@ tr:hover td{background:#fafbff;}
           <td>$29,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$14,500</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -1630,7 +1673,7 @@ tr:hover td{background:#fafbff;}
           <td>$600</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-18</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$300</td>
           <td><span class="contact-fresh">5d atrás</span></td>
           <td class="next-act">—</td>
@@ -1641,7 +1684,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-01</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$500</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -1652,7 +1695,7 @@ tr:hover td{background:#fafbff;}
           <td>$700</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-11</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$350</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -1676,8 +1719,10 @@ tr:hover td{background:#fafbff;}
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$0</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$0</div><div class="vkpi-label">Pond.</div></div>
-          <div class="vkpi vkpi-quota"><div class="vkpi-val">0x</div><div class="vkpi-label">Cobertura</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.00x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi "><div class="vkpi-val">0</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1690,19 +1735,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $4,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $4,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">0.0x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $16,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">0.0% — $0 / $8,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">$0 pipeline actual &nbsp;·&nbsp; necesita $16,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:0.0%;background:#6554c0"></div>
+            <div style="width:0.0%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $0 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $0</span>
+            <span>Brecha: $8,000</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -1738,7 +1789,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -1748,7 +1799,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-15</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="risk-tag red">Sin contacto</span></td>
           <td class="next-act">—</td>
@@ -1767,13 +1818,14 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">FM</div>
           <div>
             <h2>Fernando Mena <span class="team-badge enterprise">Enterprise</span></h2>
-            <p class="vendor-sub">11 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">5 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
-          <div class="vkpi"><div class="vkpi-val">$11,500</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi"><div class="vkpi-val">$6,150</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$4,680</div><div class="vkpi-label">Pond.</div></div>
-          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.96x</div><div class="vkpi-label">Cobertura</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.51x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">4</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -1786,19 +1838,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $12,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $12,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">1.0x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $48,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">25.6% — $6,150 / $24,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:24.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">$11,500 pipeline actual &nbsp;·&nbsp; necesita $48,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:0.0%;background:#6554c0"></div>
+            <div style="width:25.6%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $0 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $6,150</span>
+            <span>Brecha: $17,850</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -1810,11 +1868,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:9%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">1 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:55%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">6 deals · $5,350</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -1835,9 +1889,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-82927227','all',this)">Todos (11)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-82927227','high',this)">Riesgo Alto (5)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-82927227','medium',this)">Riesgo Medio (4)</button>
+              <button class="pill active" onclick="filterRisk('vendor-82927227','all',this)">Todos (5)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-82927227','high',this)">Riesgo Alto (3)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-82927227','medium',this)">Riesgo Medio (2)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -1852,50 +1906,17 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
               <tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45002415246" target="_blank" class="deal-link">CPCON</a></td>
-          <td>$600</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$180</td>
-          <td><span class="contact-fresh">7d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 1d</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45144959523" target="_blank" class="deal-link">CCN Law</a></td>
-          <td>$600</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-02</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$180</td>
-          <td><span class="contact-danger">113d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">113d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 2d</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45144967805" target="_blank" class="deal-link">Natalia Lafourcade</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-02</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">162d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">162d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 2d</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45195696438" target="_blank" class="deal-link">Covalto</a></td>
           <td>$2,350</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-03</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,175</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -1906,40 +1927,18 @@ tr:hover td{background:#fafbff;}
           <td>$1,050</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-08</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$525</td>
           <td><span class="contact-danger">22d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-high">Alto</span></td>
           <td class="risk-tags-cell"><span class="risk-tag red">22d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 8d</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45489206334" target="_blank" class="deal-link">Logistica Integral Ceballos y Asociados.</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-08</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-fresh">7d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 8d</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46041045633" target="_blank" class="deal-link">Ingenium Deus Machina</a></td>
-          <td>$650</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-soon">2026-04-15</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$195</td>
-          <td><span class="contact-danger">158d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">158d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 15d</span></td>
         </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49732386451" target="_blank" class="deal-link">BANCO ACTINVER - Nuevo tipo de objeto Deal</a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-ok">2026-05-20</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">48d atrás</span></td>
           <td class="next-act">—</td>
@@ -1950,7 +1949,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-18</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -1961,20 +1960,9 @@ tr:hover td{background:#fafbff;}
           <td>$2,750</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-02</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,375</td>
           <td><span class="contact-fresh">1d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-low">Bajo</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="low">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/52218592628" target="_blank" class="deal-link">Grupo FH</a></td>
-          <td>$3,500</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-23</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$1,050</td>
-          <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-low">Bajo</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span></td>
@@ -1991,13 +1979,14 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">FL</div>
           <div>
             <h2>Florencia Lara <span class="team-badge enterprise">Enterprise</span></h2>
-            <p class="vendor-sub">14 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">7 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
-          <div class="vkpi"><div class="vkpi-val">$6,195</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi"><div class="vkpi-val">$3,000</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$195</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,517</div><div class="vkpi-label">Pond.</div></div>
-          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.88x</div><div class="vkpi-label">Cobertura</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.46x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">4</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">6</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -2010,19 +1999,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $7,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $7,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">0.9x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $28,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">22.8% — $3,195 / $14,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:22.1%;background:#ff5630"></div></div>
-          <div class="vq-meta">$6,195 pipeline actual &nbsp;·&nbsp; necesita $28,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:1.4%;background:#6554c0"></div>
+            <div style="width:21.4%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $195 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $3,000</span>
+            <span>Brecha: $10,805</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -2034,11 +2029,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:14%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">2 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:50%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">7 deals · $3,000</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -2059,9 +2050,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-76758067','all',this)">Todos (14)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-76758067','high',this)">Riesgo Alto (5)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-76758067','medium',this)">Riesgo Medio (4)</button>
+              <button class="pill active" onclick="filterRisk('vendor-76758067','all',this)">Todos (7)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-76758067','high',this)">Riesgo Alto (2)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-76758067','medium',this)">Riesgo Medio (5)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -2076,28 +2067,17 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/44451842160" target="_blank" class="deal-link">Diccom </a></td>
-          <td>$850</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$255</td>
-          <td><span class="contact-danger">124d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">124d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 1d</span></td>
-        </tr><tr data-risk="medium">
+              <tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45915931165" target="_blank" class="deal-link">GREENLANDER</a></td>
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-13</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2108,97 +2088,31 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">12d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 22d</span> <span class="risk-tag yellow">Etapa temprana</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48359178377" target="_blank" class="deal-link">CMV - Nuevo tipo de objeto Deal</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-19</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">139d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">139d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50770728587" target="_blank" class="deal-link">Netcommerce - Nuevo tipo de objeto Deal</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">118d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">118d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/51926045499" target="_blank" class="deal-link">CC TRUCKING - Nuevo tipo de objeto Deal</a></td>
-          <td>$1,250</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$375</td>
-          <td><span class="contact-danger">105d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">105d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45915813456" target="_blank" class="deal-link">Numalliance</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">71d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">71d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/51662048592" target="_blank" class="deal-link">Grupo Diagnóstico Aries</a></td>
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-11</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">6d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49779198075" target="_blank" class="deal-link">Siegfried Rhein</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-15</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">69d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">69d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/47567798407" target="_blank" class="deal-link">Neogen </a></td>
           <td>$195</td>
           <td><span class="stage-badge" style="background:#ff563020;color:#ff5630;border:1px solid #ff563040">Risk Analysis & Docs</span></td>
           <td><span class="close-soon">2026-04-29</span></td>
-          <td><span class="badge badge-high">60%</span></td>
+          <td><span class="badge badge-pipe">—</span></td><td><span class="badge badge-high">60%</span></td>
           <td class="weighted-cell">$117</td>
           <td><span class="contact-fresh">6d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-low">Bajo</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="low">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/42824619328" target="_blank" class="deal-link">Grupo Empresarial Internacional - (Galaxy)</a></td>
-          <td>$900</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-05</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$270</td>
-          <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-low">Bajo</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span></td>
@@ -2207,7 +2121,7 @@ tr:hover td{background:#fafbff;}
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-05</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2218,7 +2132,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-25</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$500</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2229,7 +2143,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$500</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2248,13 +2162,14 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">GV</div>
           <div>
             <h2>Gilberto Vázquez <span class="team-badge territorio">Territorio</span></h2>
-            <p class="vendor-sub">16 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">14 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
-          <div class="vkpi"><div class="vkpi-val">$5,950</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi"><div class="vkpi-val">$4,950</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,775</div><div class="vkpi-label">Pond.</div></div>
-          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.74x</div><div class="vkpi-label">Cobertura</div></div>
+          <div class="vkpi vkpi-quota"><div class="vkpi-val">0.62x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
           <div class="vkpi vkpi-warn"><div class="vkpi-val">10</div><div class="vkpi-label">Riesgo Medio</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">&gt;14d sin contacto</div></div>
@@ -2267,19 +2182,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $8,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $8,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">0.7x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $32,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">30.9% — $4,950 / $16,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:18.6%;background:#ff5630"></div></div>
-          <div class="vq-meta">$5,950 pipeline actual &nbsp;·&nbsp; necesita $32,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:0.0%;background:#6554c0"></div>
+            <div style="width:30.9%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $0 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $4,950</span>
+            <span>Brecha: $11,050</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -2297,11 +2218,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:38%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">6 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:12%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">2 deals · $1,000</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -2316,9 +2233,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-83751397','all',this)">Todos (16)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-83751397','high',this)">Riesgo Alto (5)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-83751397','medium',this)">Riesgo Medio (10)</button>
+              <button class="pill active" onclick="filterRisk('vendor-83751397','all',this)">Todos (14)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-83751397','high',this)">Riesgo Alto (7)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-83751397','medium',this)">Riesgo Medio (7)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -2333,28 +2250,17 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
               <tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/31955572583" target="_blank" class="deal-link">Kia México - New Deal</a></td>
-          <td>$1,000</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$300</td>
-          <td><span class="contact-danger">132d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">132d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 1d</span></td>
-        </tr><tr data-risk="high">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/54955879273" target="_blank" class="deal-link">Beluga Logística - 3era etapa</a></td>
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-urgent">2026-04-06</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2365,7 +2271,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-urgent">2026-04-09</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -2376,7 +2282,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-20</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -2387,7 +2293,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,900</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$950</td>
           <td><span class="contact-warn">19d atrás</span></td>
           <td class="next-act">—</td>
@@ -2398,7 +2304,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-23</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -2409,29 +2315,18 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-27</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 27d</span> <span class="risk-tag yellow">Etapa temprana</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48541560224" target="_blank" class="deal-link">Multimedios - Reactivación de Contacto</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-07</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-warn">20d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">20d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48791352617" target="_blank" class="deal-link">Tec de Monterrey - Universidad</a></td>
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-05-11</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">2026-08-31</td>
@@ -2442,7 +2337,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-05-26</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2453,7 +2348,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-05-28</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2464,7 +2359,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-06-11</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2475,7 +2370,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-06-17</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">103d atrás</span></td>
           <td class="next-act">—</td>
@@ -2486,7 +2381,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-06-18</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2497,7 +2392,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-06-22</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">99d atrás</span></td>
           <td class="next-act">—</td>
@@ -2508,7 +2403,7 @@ tr:hover td{background:#fafbff;}
           <td>$3,050</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-26</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,525</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">—</td>
@@ -2527,11 +2422,12 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">JC</div>
           <div>
             <h2>Jorge Cervera <span class="team-badge enterprise">Enterprise</span></h2>
-            <p class="vendor-sub">11 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">8 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
           <div class="vkpi"><div class="vkpi-val">$4,050</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$0</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$2,025</div><div class="vkpi-label">Pond.</div></div>
           <div class="vkpi vkpi-quota"><div class="vkpi-val">0.27x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">5</div><div class="vkpi-label">Riesgo Alto</div></div>
@@ -2546,19 +2442,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $15,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $15,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">0.3x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $60,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">13.5% — $4,050 / $30,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:6.8%;background:#ff5630"></div></div>
-          <div class="vq-meta">$4,050 pipeline actual &nbsp;·&nbsp; necesita $60,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:0.0%;background:#6554c0"></div>
+            <div style="width:13.5%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $0 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $4,050</span>
+            <span>Brecha: $25,950</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -2570,11 +2472,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:36%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">4 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:27%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">3 deals · $0</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -2595,9 +2493,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-79723056','all',this)">Todos (11)</button>
+              <button class="pill active" onclick="filterRisk('vendor-79723056','all',this)">Todos (8)</button>
               <button class="pill pill-red" onclick="filterRisk('vendor-79723056','high',this)">Riesgo Alto (5)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-79723056','medium',this)">Riesgo Medio (4)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-79723056','medium',this)">Riesgo Medio (3)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -2612,7 +2510,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -2622,7 +2520,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-urgent">2026-04-09</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2631,9 +2529,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58134928729" target="_blank" class="deal-link">NGT - Legionarios MTY 2</a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-09</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-warn">18d atrás</span></td>
           <td class="next-act">—</td>
@@ -2644,7 +2542,7 @@ tr:hover td{background:#fafbff;}
           <td>$0</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-10</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2655,40 +2553,18 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-urgent">2026-04-14</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-warn">19d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-high">Alto</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">19d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 14d</span> <span class="risk-tag yellow">Etapa temprana</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr class="next-step-row" data-risk="high"><td colspan="10" class="next-step-cell">📌 Próximo paso: Reunión con Laura prox Lunes</td></tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46256833096" target="_blank" class="deal-link">Kelly Services, Inc</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-soon">2026-04-16</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="risk-tag red">Sin contacto</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">Sin historial de contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 16d</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46599449462" target="_blank" class="deal-link">Eaton Corporation </a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-soon">2026-04-21</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-ok">13d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Cierra en 21d</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
+        </tr><tr class="next-step-row" data-risk="high"><td colspan="10" class="next-step-cell">📌 Próximo paso: Reunión con Laura prox Lunes</td></tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46638066753" target="_blank" class="deal-link">Mota Engil</a></td>
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -2699,29 +2575,18 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-05-11</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">126d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-high">Alto</span></td>
           <td class="risk-tags-cell"><span class="risk-tag red">126d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag yellow">Etapa temprana</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48988381983" target="_blank" class="deal-link">ValCap</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-13</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-ok">13d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48987887140" target="_blank" class="deal-link">Grupo Gasme</a></td>
           <td>$950</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-13</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$475</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2732,7 +2597,7 @@ tr:hover td{background:#fafbff;}
           <td>$3,100</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-03</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,550</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">—</td>
@@ -2797,7 +2662,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -2807,7 +2672,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-05-31</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">6d atrás</span></td>
           <td class="next-act">—</td>
@@ -2872,7 +2737,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -2882,7 +2747,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-urgent">2026-04-08</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -2893,7 +2758,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-urgent">2026-04-09</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -2916,7 +2781,8 @@ tr:hover td{background:#fafbff;}
           </div>
         </div>
         <div class="vendor-kpis">
-          <div class="vkpi"><div class="vkpi-val">$6,350</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi"><div class="vkpi-val">$5,525</div><div class="vkpi-label">Pipeline</div></div>
+          <div class="vkpi" style="border-top:2px solid #6554c0;background:#f3f0ff"><div class="vkpi-val" style="color:#6554c0">$825</div><div class="vkpi-label">Verbal Win</div></div>
           <div class="vkpi"><div class="vkpi-val">$3,422</div><div class="vkpi-label">Pond.</div></div>
           <div class="vkpi vkpi-quota"><div class="vkpi-val">0.79x</div><div class="vkpi-label">Cobertura</div></div>
           <div class="vkpi vkpi-danger"><div class="vkpi-val">1</div><div class="vkpi-label">Riesgo Alto</div></div>
@@ -2931,19 +2797,25 @@ tr:hover td{background:#fafbff;}
         <div class="vq-row">
           <div class="vq-row-header">
             <span class="vq-section-title">🏆 Close Won vs Cuota Q2</span>
-            <span class="vq-section-val" style="color:#bf2600">$0 / $8,000 &nbsp;(0.0%)</span>
+            <span class="vq-section-val" style="color:#bf2600">$0 / $8,000 (0.0%)</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0.0%;background:#ff5630"></div></div>
-          <div class="vq-meta">Los cierres reales del Q2 se contabilizan acá</div>
+          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:0%;background:#36b37e"></div></div>
+          <div class="vq-meta">El número que importa — se actualiza con cada Close Won del Q2</div>
         </div>
         <div class="vq-divider"></div>
         <div class="vq-row">
           <div class="vq-row-header">
-            <span class="vq-section-title">📊 Cobertura de Pipeline <span class="coverage-chip chip-danger">0.8x</span></span>
-            <span class="vq-section-val" style="color:#bf2600">objetivo: 4x cuota = $32,000</span>
+            <span class="vq-section-title">📊 Forecast vs Objetivo 2x</span>
+            <span class="vq-section-val" style="color:#bf2600">39.7% — $6,350 / $16,000</span>
           </div>
-          <div class="vq-bar-bg"><div class="vq-bar-fill" style="width:19.8%;background:#ff5630"></div></div>
-          <div class="vq-meta">$6,350 pipeline actual &nbsp;·&nbsp; necesita $32,000 para cobertura 4x</div>
+          <div style="display:flex;gap:2px;border-radius:5px;overflow:hidden;height:8px;background:#e0e0e0">
+            <div style="width:5.2%;background:#6554c0"></div>
+            <div style="width:34.5%;background:#00b8d9"></div>
+          </div>
+          <div class="vq-labels">
+            <span><span style="color:#6554c0">■</span> VW: $825 &nbsp;<span style="color:#00b8d9">■</span> Pipe: $5,525</span>
+            <span>Brecha: $9,650</span>
+          </div>
         </div>
       </div>
       <div class="vendor-body">
@@ -2975,8 +2847,8 @@ tr:hover td{background:#fafbff;}
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
               <button class="pill active" onclick="filterRisk('vendor-1196819072','all',this)">Todos (22)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-1196819072','high',this)">Riesgo Alto (1)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-1196819072','medium',this)">Riesgo Medio (11)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-1196819072','high',this)">Riesgo Alto (5)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-1196819072','medium',this)">Riesgo Medio (17)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -2991,7 +2863,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -3001,7 +2873,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-15</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">2026-04-30</td>
@@ -3012,7 +2884,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3023,7 +2895,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-24</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">98d atrás</span></td>
           <td class="next-act">—</td>
@@ -3034,7 +2906,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-29</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3045,7 +2917,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3056,7 +2928,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-05-07</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3067,7 +2939,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-05-25</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3078,7 +2950,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-02</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">12d atrás</span></td>
           <td class="next-act">—</td>
@@ -3089,7 +2961,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-03</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -3100,7 +2972,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-03</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3111,7 +2983,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3122,7 +2994,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-22</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3131,9 +3003,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58134777609" target="_blank" class="deal-link">VEMO - Mobility IP</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-fresh">4d atrás</span></td>
           <td class="next-act">—</td>
@@ -3142,9 +3014,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58134838359" target="_blank" class="deal-link">VEMO - Prestadora de Servicios de Movilidad</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3153,9 +3025,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58134715659" target="_blank" class="deal-link">Vemo - Commercial Fleets</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3164,9 +3036,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58136160270" target="_blank" class="deal-link">VEMO - Mobility Charging Network</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-fresh">4d atrás</span></td>
           <td class="next-act">—</td>
@@ -3175,9 +3047,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58134838396" target="_blank" class="deal-link">VEMO - Mobility DAE</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-fresh">4d atrás</span></td>
           <td class="next-act">—</td>
@@ -3186,9 +3058,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/58136160050" target="_blank" class="deal-link">VEMO - Electromecanica</a></td>
           <td>$138</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$110</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3199,7 +3071,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,250</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$625</td>
           <td><span class="contact-fresh">1d atrás</span></td>
           <td class="next-act">—</td>
@@ -3210,7 +3082,7 @@ tr:hover td{background:#fafbff;}
           <td>$675</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-04</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$338</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3221,7 +3093,7 @@ tr:hover td{background:#fafbff;}
           <td>$2,950</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-02</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,475</td>
           <td><span class="contact-ok">12d atrás</span></td>
           <td class="next-act">—</td>
@@ -3232,7 +3104,7 @@ tr:hover td{background:#fafbff;}
           <td>$650</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-22</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$325</td>
           <td><span class="contact-ok">12d atrás</span></td>
           <td class="next-act">—</td>
@@ -3309,7 +3181,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -3319,7 +3191,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-ok">2026-06-02</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -3330,7 +3202,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3339,9 +3211,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46700925307" target="_blank" class="deal-link">INFRA - BAU </a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">2026-03-31</td>
@@ -3350,9 +3222,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46736687964" target="_blank" class="deal-link">INFRA - AFRANRENT</a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">2026-03-31</td>
@@ -3361,9 +3233,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46709565444" target="_blank" class="deal-link">INFRA - GRUPO CORPORATIVO INDUSTRIAL EMPRESARIAL</a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">2026-03-31</td>
@@ -3372,9 +3244,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/46736632940" target="_blank" class="deal-link">INFRA - ERGOFRAN</a></td>
           <td>$0</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-soon">2026-04-22</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-fresh">7d atrás</span></td>
           <td class="next-act">2026-03-31</td>
@@ -3436,7 +3308,7 @@ tr:hover td{background:#fafbff;}
             <div class="filter-pills">
               <button class="pill active" onclick="filterRisk('vendor-76273620','all',this)">Todos (4)</button>
               <button class="pill pill-red" onclick="filterRisk('vendor-76273620','high',this)">Riesgo Alto (2)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-76273620','medium',this)">Riesgo Medio (0)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-76273620','medium',this)">Riesgo Medio (2)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -3451,7 +3323,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -3461,7 +3333,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,100</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$550</td>
           <td><span class="contact-danger">28d atrás</span></td>
           <td class="next-act">—</td>
@@ -3472,7 +3344,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-urgent">2026-04-13</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">173d atrás</span></td>
           <td class="next-act">—</td>
@@ -3481,9 +3353,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49530824988" target="_blank" class="deal-link">TOTVS MX</a></td>
           <td>$280</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-ok">2026-05-19</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$224</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -3492,9 +3364,9 @@ tr:hover td{background:#fafbff;}
         </tr><tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49448240722" target="_blank" class="deal-link">TOTVS COL</a></td>
           <td>$140</td>
-          <td><span class="stage-badge" style="background:#36b37e20;color:#36b37e;border:1px solid #36b37e40">Internal Validation</span></td>
+          <td><span class="stage-badge" style="background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700">⭐ Verbal Win</span></td>
           <td><span class="close-ok">2026-05-19</span></td>
-          <td><span class="badge badge-high">80%</span></td>
+          <td><span class="badge badge-vw">⭐ Verbal Win</span></td><td><span class="badge badge-high">80%</span></td>
           <td class="weighted-cell">$112</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
@@ -3513,7 +3385,7 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">TG</div>
           <div>
             <h2>Tomas Glazman </h2>
-            <p class="vendor-sub">21 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">15 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
@@ -3535,11 +3407,7 @@ tr:hover td{background:#fafbff;}
             <div class="stage-bar-fill" style="width:10%;background:#0052cc"></div>
           </div>
           <div class="stage-meta">2 deals · $0</div>
-        </div><div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:29%;background:#00b8d9"></div>
-          </div>
+        </div>
           <div class="stage-meta">6 deals · $18,250</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -3560,9 +3428,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-713443350','all',this)">Todos (21)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-713443350','high',this)">Riesgo Alto (4)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-713443350','medium',this)">Riesgo Medio (9)</button>
+              <button class="pill active" onclick="filterRisk('vendor-713443350','all',this)">Todos (15)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-713443350','high',this)">Riesgo Alto (2)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-713443350','medium',this)">Riesgo Medio (13)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -3577,50 +3445,17 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45092462111" target="_blank" class="deal-link">LOGAN MX</a></td>
-          <td>$600</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$180</td>
-          <td><span class="contact-danger">55d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">55d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 1d</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45116520736" target="_blank" class="deal-link">KIO</a></td>
-          <td>$2,750</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-03</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$825</td>
-          <td><span class="contact-danger">165d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">165d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 3d</span></td>
-        </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45489323848" target="_blank" class="deal-link">Grupo Lamosa</a></td>
-          <td>$13,900</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-urgent">2026-04-08</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$4,170</td>
-          <td><span class="contact-ok">14d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag red">Cierra en 8d</span></td>
-        </tr><tr data-risk="medium">
+              <tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/45429961374" target="_blank" class="deal-link">Peña Verde - POC</a></td>
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-urgent">2026-04-08</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-fresh">1d atrás</span></td>
           <td class="next-act">2026-04-01</td>
@@ -3631,51 +3466,29 @@ tr:hover td{background:#fafbff;}
           <td>$550</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-21</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$275</td>
           <td><span class="contact-danger">74d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag red">74d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
         </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49779160760" target="_blank" class="deal-link">Unitam</a></td>
-          <td>$1,000</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-24</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$300</td>
-          <td><span class="contact-danger">62d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">62d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50331910474" target="_blank" class="deal-link">PALO IT </a></td>
           <td>$1,525</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-25</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$762</td>
           <td><span class="contact-warn">20d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">20d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50513525611" target="_blank" class="deal-link">DPORTENIS</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-26</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">132d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">132d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50435936643" target="_blank" class="deal-link">Virutex Ilko</a></td>
           <td>$375</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-27</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$188</td>
           <td><span class="contact-danger">124d atrás</span></td>
           <td class="next-act">—</td>
@@ -3686,29 +3499,18 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-01</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
           <td><span class="risk-level risk-medium">Medio</span></td>
           <td class="risk-tags-cell"><span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/51446616175" target="_blank" class="deal-link">Ecom Trading</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-08</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">61d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">61d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
         </tr><tr data-risk="medium">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/52073928747" target="_blank" class="deal-link">Astellas Pharma Inc</a></td>
           <td>$2,325</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-18</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,162</td>
           <td><span class="contact-warn">21d atrás</span></td>
           <td class="next-act">—</td>
@@ -3719,7 +3521,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#0052cc20;color:#0052cc;border:1px solid #0052cc40">Qualified</span></td>
           <td><span class="close-ok">2026-06-19</span></td>
-          <td><span class="badge badge-mid">40%</span></td>
+          <td><span class="badge badge-pipe">Qualified</span></td><td><span class="badge badge-mid">40%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-ok">8d atrás</span></td>
           <td class="next-act">—</td>
@@ -3730,7 +3532,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,750</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-06</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$875</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -3741,7 +3543,7 @@ tr:hover td{background:#fafbff;}
           <td>$4,400</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-14</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$2,200</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3752,7 +3554,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,150</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-25</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$575</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3763,7 +3565,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,250</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-27</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$625</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3774,7 +3576,7 @@ tr:hover td{background:#fafbff;}
           <td>$2,000</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-02</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$1,000</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3785,7 +3587,7 @@ tr:hover td{background:#fafbff;}
           <td>$625</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-05</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$312</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3796,7 +3598,7 @@ tr:hover td{background:#fafbff;}
           <td>$900</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-06-09</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$450</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3807,7 +3609,7 @@ tr:hover td{background:#fafbff;}
           <td>$1,350</td>
           <td><span class="stage-badge" style="background:#ff563020;color:#ff5630;border:1px solid #ff563040">Risk Analysis & Docs</span></td>
           <td><span class="close-ok">2026-06-29</span></td>
-          <td><span class="badge badge-high">60%</span></td>
+          <td><span class="badge badge-pipe">—</span></td><td><span class="badge badge-high">60%</span></td>
           <td class="weighted-cell">$810</td>
           <td><span class="contact-fresh">6d atrás</span></td>
           <td class="next-act">—</td>
@@ -3826,7 +3628,7 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-avatar-lg ">TG</div>
           <div>
             <h2>Tomás García Estebarena </h2>
-            <p class="vendor-sub">5 negocios en pipeline Q2 · MX Sales</p>
+            <p class="vendor-sub">1 negocios en pipeline Q2 · MX Sales</p>
           </div>
         </div>
         <div class="vendor-kpis">
@@ -3842,11 +3644,7 @@ tr:hover td{background:#fafbff;}
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
-          <div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:80%;background:#00b8d9"></div>
-          </div>
+          
           <div class="stage-meta">4 deals · $12,600</div>
         </div><div class="stage-row">
           <div class="stage-label" style="color:#ff991f">Negotiation</div>
@@ -3861,9 +3659,9 @@ tr:hover td{background:#fafbff;}
           <div class="vendor-table-controls">
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
-              <button class="pill active" onclick="filterRisk('vendor-81674017','all',this)">Todos (5)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-81674017','high',this)">Riesgo Alto (2)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-81674017','medium',this)">Riesgo Medio (2)</button>
+              <button class="pill active" onclick="filterRisk('vendor-81674017','all',this)">Todos (1)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-81674017','high',this)">Riesgo Alto (0)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-81674017','medium',this)">Riesgo Medio (1)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -3878,61 +3676,17 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50591445672" target="_blank" class="deal-link">WeBull</a></td>
-          <td>$12,000</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$3,600</td>
-          <td><span class="contact-danger">67d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">67d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/48859436588" target="_blank" class="deal-link">VTEX</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-11</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">62d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">62d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/49448094870" target="_blank" class="deal-link">Brand Arrays</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-18</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">71d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">71d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr><tr data-risk="medium">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/42656969472" target="_blank" class="deal-link">IntegraMed</a></td>
-          <td>$600</td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-06-01</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$180</td>
-          <td><span class="contact-danger">61d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-medium">Medio</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">61d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span></td>
-        </tr><tr data-risk="low">
+              <tr data-risk="low">
           <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50524499071" target="_blank" class="deal-link">Efuelsolutions</a></td>
           <td>$600</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-27</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$300</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -3967,11 +3721,7 @@ tr:hover td{background:#fafbff;}
       <div class="vendor-body">
         <div class="stage-breakdown">
           <div class="section-title">Distribución por etapa</div>
-          <div class="stage-row">
-          <div class="stage-label" style="color:#00b8d9">Nurturing</div>
-          <div class="stage-bar-bg">
-            <div class="stage-bar-fill" style="width:100%;background:#00b8d9"></div>
-          </div>
+          
           <div class="stage-meta">1 deals · $0</div>
         </div>
         </div>
@@ -3997,23 +3747,12 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-risk="high">
-          <td class="deal-name-cell"><a href="https://app.hubspot.com/contacts/19835492/record/0-3/50551217931" target="_blank" class="deal-link">Entrust Corporation</a></td>
-          <td><span class="na">—</span></td>
-          <td><span class="stage-badge" style="background:#00b8d920;color:#00b8d9;border:1px solid #00b8d940">Nurturing</span></td>
-          <td><span class="close-ok">2026-05-27</span></td>
-          <td><span class="badge badge-low">30%</span></td>
-          <td class="weighted-cell">$0</td>
-          <td><span class="contact-danger">124d atrás</span></td>
-          <td class="next-act">—</td>
-          <td><span class="risk-level risk-high">Alto</span></td>
-          <td class="risk-tags-cell"><span class="risk-tag red">124d sin contacto</span> <span class="risk-tag yellow">Sin próxima actividad</span> <span class="risk-tag gray">Sin monto</span></td>
-        </tr>
+              
             </tbody>
           </table>
           </div>
@@ -4062,8 +3801,8 @@ tr:hover td{background:#fafbff;}
             <div class="section-title">Detalle de negocios</div>
             <div class="filter-pills">
               <button class="pill active" onclick="filterRisk('vendor-83751399','all',this)">Todos (6)</button>
-              <button class="pill pill-red" onclick="filterRisk('vendor-83751399','high',this)">Riesgo Alto (1)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-83751399','medium',this)">Riesgo Medio (1)</button>
+              <button class="pill pill-red" onclick="filterRisk('vendor-83751399','high',this)">Riesgo Alto (2)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-83751399','medium',this)">Riesgo Medio (4)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -4078,7 +3817,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -4088,7 +3827,7 @@ tr:hover td{background:#fafbff;}
           <td>$500</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$250</td>
           <td><span class="contact-danger">27d atrás</span></td>
           <td class="next-act">—</td>
@@ -4099,7 +3838,7 @@ tr:hover td{background:#fafbff;}
           <td><span class="na">—</span></td>
           <td><span class="stage-badge" style="background:#7b61ff20;color:#7b61ff;border:1px solid #7b61ff40">Discovery</span></td>
           <td><span class="close-soon">2026-04-30</span></td>
-          <td><span class="badge badge-low">10%</span></td>
+          <td><span class="badge badge-pipe">Discovery</span></td><td><span class="badge badge-low">10%</span></td>
           <td class="weighted-cell">$0</td>
           <td><span class="contact-danger">147d atrás</span></td>
           <td class="next-act">—</td>
@@ -4110,7 +3849,7 @@ tr:hover td{background:#fafbff;}
           <td>$700</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-24</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$350</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -4121,7 +3860,7 @@ tr:hover td{background:#fafbff;}
           <td>$4,900</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-29</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$2,450</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -4132,7 +3871,7 @@ tr:hover td{background:#fafbff;}
           <td>$600</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-10</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$300</td>
           <td><span class="contact-ok">14d atrás</span></td>
           <td class="next-act">—</td>
@@ -4143,7 +3882,7 @@ tr:hover td{background:#fafbff;}
           <td>$350</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-ok">2026-05-20</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$175</td>
           <td><span class="contact-ok">13d atrás</span></td>
           <td class="next-act">—</td>
@@ -4193,7 +3932,7 @@ tr:hover td{background:#fafbff;}
             <div class="filter-pills">
               <button class="pill active" onclick="filterRisk('vendor-173447996','all',this)">Todos (1)</button>
               <button class="pill pill-red" onclick="filterRisk('vendor-173447996','high',this)">Riesgo Alto (0)</button>
-              <button class="pill pill-yellow" onclick="filterRisk('vendor-173447996','medium',this)">Riesgo Medio (0)</button>
+              <button class="pill pill-yellow" onclick="filterRisk('vendor-173447996','medium',this)">Riesgo Medio (1)</button>
             </div>
           </div>
           <div style="overflow-x:auto">
@@ -4208,7 +3947,7 @@ tr:hover td{background:#fafbff;}
                 <th>Ponderado</th>
                 <th>Último Contacto</th>
                 <th>Prox. Actividad</th>
-                <th>Riesgo</th>
+                <th>Categoría</th><th>Riesgo</th>
                 <th>Indicadores</th>
               </tr>
             </thead>
@@ -4218,7 +3957,7 @@ tr:hover td{background:#fafbff;}
           <td>$38</td>
           <td><span class="stage-badge" style="background:#ff991f20;color:#ff991f;border:1px solid #ff991f40">Negotiation</span></td>
           <td><span class="close-soon">2026-04-21</span></td>
-          <td><span class="badge badge-mid">50%</span></td>
+          <td><span class="badge badge-pipe">Negotiation</span></td><td><span class="badge badge-mid">50%</span></td>
           <td class="weighted-cell">$19</td>
           <td><span class="contact-fresh">Hoy</span></td>
           <td class="next-act">—</td>
