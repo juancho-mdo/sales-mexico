@@ -8,26 +8,34 @@ on:
   # Allow manual trigger from GitHub Actions UI
   workflow_dispatch:
 
+# IMPORTANT: required to push index.html back to the repo
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
+
+    # Opt into Node.js 24 to avoid deprecation warnings
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install --no-cache-dir requests
 
       - name: Generate dashboard
         env:
           HUBSPOT_TOKEN: ${{ secrets.HUBSPOT_TOKEN }}
-        run: python update_dashboard.py
+        run: python3 update_dashboard.py
 
       - name: Commit and push updated dashboard
         run: |
