@@ -104,6 +104,27 @@ def hs_search_all(filters, properties):
             break
     return results
 
+# Canonical name corrections (HubSpot sometimes strips accents)
+NAME_CORRECTIONS = {
+    "Agustin Merli":       "Agustín Merli",
+    "Patricio Fernandez":  "Patricio Fernández",
+    "Gilberto Vazquez":    "Gilberto Vázquez",
+    "Tomas Glazman":       "Tomas Glazman",
+    "Tomas Garcia":        "Tomás García",
+    "Tomas Garcia Estebarena": "Tomás García Estebarena",
+    "Tobias Savich":       "Tobías Savich",
+    "Sergio Ruisenor":     "Sergio Ruiseñor",
+    "Florencia Lara":      "Florencia Lara",
+    "Mariel Alejos":       "Mariel Alejos",
+    "Fernando Mena":       "Fernando Mena",
+    "Jorge Cervera":       "Jorge Cervera",
+    "Andrea Teele Vera":   "Andrea Teele Vera",
+    "Juan Monte de Oca":   "Juan Monte de Oca",
+}
+
+def normalize_name(name):
+    return NAME_CORRECTIONS.get(name, name)
+
 def fetch_owners():
     owners, after = {}, None
     while True:
@@ -113,7 +134,7 @@ def fetch_owners():
         data = hs_get("/crm/v3/owners", params)
         for o in data.get("results", []):
             name = f"{o.get('firstName', '')} {o.get('lastName', '')}".strip()
-            owners[str(o["id"])] = name
+            owners[str(o["id"])] = normalize_name(name)
         after = data.get("paging", {}).get("next", {}).get("after")
         if not after:
             break
@@ -121,11 +142,21 @@ def fetch_owners():
 
 # ─── Date/Week helpers ─────────────────────────────────────────────────────────
 
-def ms_to_date(ms):
-    if not ms:
+def ms_to_date(val):
+    """Convert HubSpot date value to YYYY-MM-DD string.
+    HubSpot returns dates as either:
+      - Unix timestamp in ms: "1746057600000"
+      - ISO 8601 string:      "2026-04-30T00:00:00.000Z"
+    """
+    if not val:
         return ""
     try:
-        return datetime.datetime.utcfromtimestamp(int(ms) / 1000).strftime("%Y-%m-%d")
+        s = str(val).strip()
+        if s.isdigit():
+            # Millisecond timestamp
+            return datetime.datetime.utcfromtimestamp(int(s) / 1000).strftime("%Y-%m-%d")
+        # ISO date string — just take the first 10 chars (YYYY-MM-DD)
+        return s[:10]
     except Exception:
         return ""
 
