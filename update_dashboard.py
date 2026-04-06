@@ -38,6 +38,7 @@ QUOTAS = {
     "Jorge Cervera":      {"quota": 15000, "team": "Enterprise", "initials": "JC", "id": "v-jorge"},
     "Fernando Mena":      {"quota": 12000, "team": "Enterprise", "initials": "FM", "id": "v-fer"},
     "Juan Monte de Oca":  {"quota": 10000, "team": "Enterprise", "initials": "JM", "id": "v-juan"},
+    "Tomas Glazman":      {"quota": 10000, "team": "Enterprise", "initials": "TG", "id": "v-tomas"},
     "Florencia Lara":     {"quota":  7000, "team": "Territorio",  "initials": "FL", "id": "v-flor"},
     "Patricio Fernández": {"quota":  8000, "team": "Territorio",  "initials": "PF", "id": "v-pato"},
     "Gilberto Vázquez":   {"quota":  8000, "team": "Territorio",  "initials": "GV", "id": "v-gil"},
@@ -47,7 +48,7 @@ QUOTAS = {
 }
 
 EXCLUDED_VENDORS = {
-    "Tomas Glazman", "Tomás García", "Val Sánchez", "Eloy Becerril", "Ana Cuevas",
+    "Tomás García", "Val Sánchez", "Eloy Becerril", "Ana Cuevas",
     "Kin Carrera", "Pablo Bringas", "Jessica Rosas", "Tomas Estruga", "Manon Fabre",
     "Valeria Aranda", "Tobías Savich", "Karim Flores", "Oscar Espinosa", "Cris Hernandez",
 }
@@ -56,7 +57,7 @@ ENT_GOAL        = 51000
 TER_GOAL        = 44000
 FORECAST_TARGET = 190000
 
-ENT_NAMES = ["Agustín Merli", "Jorge Cervera", "Fernando Mena", "Juan Monte de Oca"]
+ENT_NAMES = ["Agustín Merli", "Jorge Cervera", "Fernando Mena", "Juan Monte de Oca", "Tomas Glazman"]
 TER_NAMES = ["Florencia Lara", "Patricio Fernández", "Gilberto Vázquez",
              "Andrea Teele Vera", "Sergio Ruiseñor", "Mariel Alejos"]
 
@@ -739,7 +740,6 @@ def build_html(data, update_time):
             f'  <td>{stage_badge_html(sid, deal["stage"])}</td>\n'
             f'  <td>{month_badge_html(deal["month"])}</td>\n'
             f'  <td><span class="{lc_cls}">{lc_txt}</span></td>\n'
-            f'  <td class="small-cell">{na_html}</td>\n'
             f'  <td><span class="risk-badge {RISK_CSS[rl]}">{RISK_LBL[rl]}</span></td>\n'
             f'</tr>'
         )
@@ -850,6 +850,7 @@ def build_html(data, update_time):
         <select class="filter-select" id="filter-vendor-cat-{tbid}"
                 onchange="filterVendorDeals('{tbid}')">
           <option value="">Todas las etapas</option>
+          <option value="Close Won">Close Won</option>
           <option value="Verbal Win">Verbal Win</option>
           <option value="Discovery">Discovery</option>
           <option value="Qualified">Qualified</option>
@@ -1145,6 +1146,7 @@ def build_html(data, update_time):
         </select>
         <select class="filter-select" id="filter-cat" onchange="filterOverview()">
           <option value="">Todas las etapas</option>
+          <option value="Close Won">Close Won</option>
           <option value="Verbal Win">Verbal Win</option>
           <option value="Discovery">Discovery</option>
           <option value="Qualified">Qualified</option>
@@ -1167,7 +1169,6 @@ def build_html(data, update_time):
         <th>Etapa</th>
         <th onclick="sortTable(4,'overview-tbody')">Mes cierre ↕</th>
         <th onclick="sortTable(5,'overview-tbody')">Últ. Contacto ↕</th>
-        <th>Próx. Actividad</th>
         <th>Riesgo</th>
       </tr></thead>
       <tbody id="overview-tbody">
