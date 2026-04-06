@@ -626,8 +626,6 @@ function filterNegocios() {
   });
 }
 
-let _currentWeekIdx = 0;
-
 function showWeek(idx, btn) {
   _currentWeekIdx = idx;
   document.querySelectorAll('.week-sidebar-btn').forEach(b => b.classList.remove('active'));
