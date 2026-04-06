@@ -286,11 +286,14 @@ def process_data(owners, raw_q2, raw_new):
         sid  = p.get("dealstage", "")
         if sid in (NURTURING, CLOSED_LOST):
             continue
+        amt     = float(p.get("amount") or 0)
+        # Skip Close Won deals with $0 — they are administrative/duplicate entries
+        if sid == CLOSE_WON and amt == 0:
+            continue
         owner   = owners.get(str(p.get("hubspot_owner_id", "")), "Desconocido")
         cd      = ms_to_date(p.get("closedate"))
         lc      = ms_to_date(p.get("notes_last_contacted"))
         na      = ms_to_date(p.get("hs_next_activity_date"))
-        amt     = float(p.get("amount") or 0)
         deals.append({
             "id": d["id"], "name": p.get("dealname", "—"),
             "amount": amt, "close_date": cd, "month": month_of(cd),
