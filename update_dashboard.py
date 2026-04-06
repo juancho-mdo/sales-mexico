@@ -26,9 +26,11 @@ STAGE_NAMES = {
     "13516852":  "RA&D",
     "13510790":  "Validación Interna",
     "13516853":  "Close Won",
+    "13516854":  "Closed Lost",
 }
 
 NURTURING       = "108155261"
+CLOSED_LOST     = "13516854"
 VERBAL_WIN      = {"13516852", "13510790"}
 PIPELINE_STAGES = {"213223445", "13516851", "13510788"}
 CLOSE_WON       = "13516853"
@@ -282,7 +284,7 @@ def process_data(owners, raw_q2, raw_new):
             continue
         p    = d.get("properties", {})
         sid  = p.get("dealstage", "")
-        if sid == NURTURING:
+        if sid in (NURTURING, CLOSED_LOST):
             continue
         owner   = owners.get(str(p.get("hubspot_owner_id", "")), "Desconocido")
         cd      = ms_to_date(p.get("closedate"))
