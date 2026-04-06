@@ -53,6 +53,9 @@ EXCLUDED_VENDORS = {
     "Valeria Aranda", "Tobías Savich", "Karim Flores", "Oscar Espinosa", "Cris Hernandez",
 }
 
+# Deals cerrados en Q1 que no deben contarse en Q2
+EXCLUDED_DEALS = {"53886975061", "58368934155"}   # Pizza Hut, ROLEX
+
 ENT_GOAL        = 51000
 TER_GOAL        = 44000
 FORECAST_TARGET = 190000
@@ -275,6 +278,8 @@ def process_data(owners, raw_q2, raw_new):
     # ── Q2 deals
     deals = []
     for d in raw_q2:
+        if str(d.get("id", "")) in EXCLUDED_DEALS:
+            continue
         p    = d.get("properties", {})
         sid  = p.get("dealstage", "")
         if sid == NURTURING:
