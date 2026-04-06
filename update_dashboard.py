@@ -186,7 +186,7 @@ def month_of(date_str):
         return "—"
     try:
         m = datetime.date.fromisoformat(date_str[:10]).month
-        return {4: "Abril", 5: "Mayo", 6: "Junio"}.get(m, "—")
+        return {4: "Abril", 5: "Mayo", 6: "Junio", 7: "Julio"}.get(m, "—")
     except Exception:
         return "—"
 
@@ -271,7 +271,7 @@ def stage_badge_html(stage_id, stage_name):
             f'style="background:{bg};color:{fg};border:1px solid {br}">{sn}</span>')
 
 def month_badge_html(month):
-    cls = {"Abril": "badge-abril", "Mayo": "badge-mayo", "Junio": "badge-junio"}.get(month, "")
+    cls = {"Abril": "badge-abril", "Mayo": "badge-mayo", "Junio": "badge-junio", "Julio": "badge-julio"}.get(month, "")
     return f'<span class="badge {cls}">{month}</span>' if cls else month
 
 # ─── Data processing ───────────────────────────────────────────────────────────
@@ -309,7 +309,7 @@ def process_data(owners, raw_q2, raw_new):
     forecast   = vw_t + pipe_t + cw_t
 
     months_data = {m: {"vw": 0, "pipe": 0, "cw": 0, "count": 0}
-                   for m in ["Abril", "Mayo", "Junio"]}
+                   for m in ["Abril", "Mayo", "Junio", "Julio"]}
     for d in deals:
         m = d["month"]
         if m not in months_data:
@@ -485,6 +485,7 @@ tr.hidden{display:none;}
 .badge-abril{background:#e9f0ff;color:#0052cc;}
 .badge-mayo{background:#e3fcef;color:#006644;}
 .badge-junio{background:#fff4e5;color:#974900;}
+.badge-julio{background:#f3e8ff;color:#6b21a8;}
 .risk-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700;}
 .risk-high{background:#ffe9e4;color:var(--red-dk);}
 .risk-med{background:#fff4e5;color:#974900;}
@@ -1115,7 +1116,7 @@ def build_html(data, update_time):
   <div class="three-col">""")
 
     # Month cards
-    month_dots = {"Abril": "#0052cc", "Mayo": "#00b8d9", "Junio": "#00875a"}
+    month_dots = {"Abril": "#0052cc", "Mayo": "#00b8d9", "Junio": "#00875a", "Julio": "#6b21a8"}
     for mname, mclr in month_dots.items():
         md      = months[mname]
         m_total = md["vw"] + md["pipe"] + md["cw"]
@@ -1312,10 +1313,10 @@ def main():
     owners = fetch_owners()
     print(f"  {len(owners)} owners found")
 
-    # Q2 date range (Apr 1 – Jun 30 of current year)
+    # Q2 date range (Apr 1 – Jul 31 of current year, extended to capture borderline deals)
     yr         = today.year
     q2_start   = datetime.datetime(yr, 4, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
-    q2_end     = datetime.datetime(yr, 6, 30, 23, 59, 59, tzinfo=datetime.timezone.utc)
+    q2_end     = datetime.datetime(yr, 7, 31, 23, 59, 59, tzinfo=datetime.timezone.utc)
     q2_start_ms = str(int(q2_start.timestamp() * 1000))
     q2_end_ms   = str(int(q2_end.timestamp() * 1000))
 
