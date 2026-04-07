@@ -110,22 +110,29 @@ def hs_search_all(filters, properties):
             break
     return results
 
-# Canonical name corrections (HubSpot sometimes strips accents)
+# Canonical name corrections — maps exact HubSpot name → display name used in QUOTAS/EXCLUDED_VENDORS
+# Verified against HubSpot owners API on 2026-04-06
 NAME_CORRECTIONS = {
-    "Agustin Merli":       "Agustín Merli",
-    "Patricio Fernandez":  "Patricio Fernández",
-    "Gilberto Vazquez":    "Gilberto Vázquez",
-    "Tomas Glazman":       "Tomas Glazman",
-    "Tomas Garcia":        "Tomás García",
-    "Tomas Garcia Estebarena": "Tomás García Estebarena",
-    "Tobias Savich":       "Tobías Savich",
-    "Sergio Ruisenor":     "Sergio Ruiseñor",
-    "Florencia Lara":      "Florencia Lara",
-    "Mariel Alejos":       "Mariel Alejos",
-    "Fernando Mena":       "Fernando Mena",
-    "Jorge Cervera":       "Jorge Cervera",
-    "Andrea Teele Vera":   "Andrea Teele Vera",
-    "Juan Monte de Oca":   "Juan Monte de Oca",
+    # ── QUOTAS members ──────────────────────────────────────────────────────
+    "Agustin Merli":              "Agustín Merli",        # HubSpot strips accent
+    "Juan Monte de oca":          "Juan Monte de Oca",    # HubSpot uses lowercase 'o'
+    "Gilberto Vazquez Garza":     "Gilberto Vázquez",     # HubSpot adds extra surname + no accent
+    "Gilberto Vazquez":           "Gilberto Vázquez",     # fallback without accent
+    "Sergio Ruiseñor Altamirano": "Sergio Ruiseñor",      # HubSpot adds extra surname
+    "Sergio Ruisenor Altamirano": "Sergio Ruiseñor",      # fallback without accent
+    "Sergio Ruisenor":            "Sergio Ruiseñor",      # fallback
+    "Mariel Alejos Polanco":      "Mariel Alejos",        # HubSpot adds extra surname
+    "Patricio Fernandez":         "Patricio Fernández",   # fallback without accent
+    "Tobias Savich":              "Tobías Savich",        # fallback without accent
+    # ── Excluded vendors (normalize so exclusion list matches) ────────────
+    "Tomás Garcia Estebarena":    "Tomás García",         # normalize to EXCLUDED_VENDORS key
+    "Tomas Garcia Estebarena":    "Tomás García",
+    "Ana Cuevas García Margain":  "Ana Cuevas",
+    "Ana Cuevas Garcia Margain":  "Ana Cuevas",
+    "Jessica Paola Rosas Castillo": "Jessica Rosas",
+    "Karim Fabian Flores Zamora": "Karim Flores",
+    "Cristian Hernández":         "Cris Hernandez",
+    "Cristian Hernandez":         "Cris Hernandez",
 }
 
 def normalize_name(name):
@@ -300,6 +307,7 @@ def process_data(owners, raw_q2, raw_new):
             "stage_id": sid, "stage": STAGE_NAMES.get(sid, sid or "—"),
             "owner": owner, "last_contact": lc, "next_activity": na,
             "risk": risk_label(lc, na, amt),
+            "origen": origin_label(p.get("origen") or ""),
         })
     deals.sort(key=lambda d: (d.get("amount") or 0), reverse=True)
 
@@ -742,7 +750,7 @@ def build_html(data, update_time):
         cat_attr = "Verbal Win" if sid in VERBAL_WIN else deal["stage"]
         risk_attr = RISK_LBL.get(rl, "").lower()
         deal_url  = f"https://app.hubspot.com/contacts/{PORTAL_ID}/record/0-3/{deal['id']}"
-        na_html   = f'<span class="small-cell">{na}</span>' if na else '<span class="na">—</span>'
+        origen_html = f'<span class="origen-tag">{deal["origen"]}</span>' if deal.get("origen") else '<span class="na">—</span>'
         row = (
             f'<tr data-owner="{owner}" data-risk="{risk_attr}" data-cat="{cat_attr}">\n'
             f'  <td><a href="{deal_url}" target="_blank" class="deal-link">{deal["name"]}</a></td>\n'
@@ -750,6 +758,7 @@ def build_html(data, update_time):
             f'  <td class="na-cell">{owner}</td>\n'
             f'  <td>{stage_badge_html(sid, deal["stage"])}</td>\n'
             f'  <td>{month_badge_html(deal["month"])}</td>\n'
+            f'  <td><span class="origen-tag">{deal.get("origen") or "—"}</span></td>\n'
             f'  <td><span class="{lc_cls}">{lc_txt}</span></td>\n'
             f'  <td><span class="risk-badge {RISK_CSS[rl]}">{RISK_LBL[rl]}</span></td>\n'
             f'</tr>'
@@ -794,16 +803,14 @@ def build_html(data, update_time):
             rl2      = deal["risk"]
             cat2     = "Verbal Win" if sid in VERBAL_WIN else deal["stage"]
             d_url    = f"https://app.hubspot.com/contacts/{PORTAL_ID}/record/0-3/{deal['id']}"
-            na2      = deal["next_activity"]
-            na2_html = f'<span class="small-cell">{na2}</span>' if na2 else '<span class="na">—</span>'
             v_deal_rows.append(
                 f'<tr data-cat="{cat2}">'
                 f'<td><a href="{d_url}" target="_blank" class="deal-link">{deal["name"]}</a></td>'
                 f'<td>{usd(deal["amount"])}</td>'
                 f'<td>{stage_badge_html(sid, deal["stage"])}</td>'
                 f'<td>{month_badge_html(deal["month"])}</td>'
+                f'<td><span class="origen-tag">{deal.get("origen") or "—"}</span></td>'
                 f'<td><span class="{lc_cls2}">{lc_txt2}</span></td>'
-                f'<td class="small-cell">{na2_html}</td>'
                 f'<td><span class="risk-badge {RISK_CSS[rl2]}">{RISK_LBL[rl2]}</span></td>'
                 f'</tr>'
             )
@@ -876,8 +883,8 @@ def build_html(data, update_time):
         <th onclick="sortTable(1,'{tbid}')">Monto ↕</th>
         <th>Etapa</th>
         <th onclick="sortTable(3,'{tbid}')">Mes cierre ↕</th>
+        <th>Origen</th>
         <th>Últ. Contacto</th>
-        <th>Próx. Actividad</th>
         <th>Riesgo</th>
       </tr></thead>
       <tbody id="{tbid}">
@@ -1179,7 +1186,8 @@ def build_html(data, update_time):
         <th>Vendedor</th>
         <th>Etapa</th>
         <th onclick="sortTable(4,'overview-tbody')">Mes cierre ↕</th>
-        <th onclick="sortTable(5,'overview-tbody')">Últ. Contacto ↕</th>
+        <th>Origen</th>
+        <th onclick="sortTable(6,'overview-tbody')">Últ. Contacto ↕</th>
         <th>Riesgo</th>
       </tr></thead>
       <tbody id="overview-tbody">
@@ -1332,7 +1340,7 @@ def main():
         ],
         properties=[
             "dealname", "amount", "closedate", "hubspot_owner_id",
-            "dealstage", "notes_last_contacted", "hs_next_activity_date",
+            "dealstage", "notes_last_contacted", "hs_next_activity_date", "origen",
         ],
     )
     print(f"  {len(raw_q2)} Q2 deals")
