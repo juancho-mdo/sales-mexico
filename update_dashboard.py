@@ -562,6 +562,46 @@ tr.hidden{display:none;}
 #week-deal-table tr:hover td{background:rgba(0,82,204,.03);}
 .stage-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.72rem;font-weight:600;}
 .origen-tag{font-size:.75rem;color:var(--muted);}
+/* === Mejoras UX: Pestaña Negocios === */
+.neg-card-header{{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;flex-wrap:wrap}}
+.neg-card-header .section-title{{margin-bottom:2px}}
+.neg-card-header .section-sub{{margin-bottom:0}}
+.seg-control{{display:inline-flex;background:#f4f5f7;border:1px solid var(--border);border-radius:8px;padding:2px;gap:2px}}
+.seg-btn{{padding:5px 12px;font-size:.72rem;font-weight:600;color:var(--muted);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:.15s;white-space:nowrap}}
+.seg-btn:hover{{color:var(--blue)}}
+.seg-btn.on{{background:#fff;color:var(--blue);box-shadow:0 1px 2px rgba(0,0,0,.08)}}
+.chart-box{{position:relative;height:260px;width:100%}}
+.chart-box.tall{{height:300px}}
+.chart-summary{{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;font-size:.72rem;color:var(--muted)}}
+.chart-summary strong{{color:var(--text);font-weight:700}}
+.channel-legend{{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}}
+.channel-chip{{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid var(--border);background:#fff;border-radius:20px;font-size:.72rem;font-weight:600;cursor:pointer;transition:.15s;user-select:none;color:var(--text)}}
+.channel-chip:hover{{border-color:#aab4c2}}
+.channel-chip.off{{opacity:.35;background:#f4f5f7}}
+.channel-chip .dot{{width:9px;height:9px;border-radius:50%;flex-shrink:0}}
+.channel-actions{{display:flex;gap:6px}}
+.mini-btn{{padding:4px 10px;font-size:.7rem;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:.1s}}
+.mini-btn:hover{{color:var(--blue);border-color:var(--blue)}}
+/* Vendor matrix mejorada */
+.vendor-matrix-wrap{{position:relative;max-height:70vh;overflow:auto;border-top:1px solid var(--border)}}
+.vendor-matrix thead th{{position:sticky;top:0;background:#f4f5f7;z-index:3;cursor:pointer;user-select:none;transition:background .15s}}
+.vendor-matrix thead th:hover{{background:#e9edf3;color:var(--blue)}}
+.vendor-matrix th.vname,.vendor-matrix td.vname{{position:sticky;left:0;background:#fff;z-index:2;text-align:left}}
+.vendor-matrix thead th.vname{{background:#f4f5f7;z-index:4}}
+.vrow:hover td.vname{{background:#fafbff}}
+.vendor-matrix th.sorted-asc::after{{content:" ▲";color:var(--blue);font-size:.68rem}}
+.vendor-matrix th.sorted-desc::after{{content:" ▼";color:var(--blue);font-size:.68rem}}
+.vendor-matrix tfoot td{{font-weight:700;background:#f8f9fc;border-top:2px solid var(--border);color:var(--muted);position:sticky;bottom:0;z-index:2}}
+.vendor-matrix .wk-cell{{min-width:52px;transition:transform .1s}}
+.vendor-matrix .wk-cell:hover{{outline:2px solid var(--blue);outline-offset:-2px}}
+.heat-legend{{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--muted)}}
+.heat-scale{{display:flex;border-radius:4px;overflow:hidden;border:1px solid var(--border)}}
+.heat-scale span{{display:inline-block;width:18px;height:14px}}
+.vtotal-cell{{background:#f0f4ff!important;color:var(--blue);font-weight:800!important;text-align:center!important}}
+.rank-badge{{display:inline-block;min-width:20px;padding:1px 6px;margin-right:6px;border-radius:10px;background:#f0f4ff;color:var(--blue);font-size:.66rem;font-weight:700;text-align:center}}
+.rank-badge.top{{background:linear-gradient(135deg,#ffd24d,#ff991f);color:#fff}}
+.rank-badge.top2{{background:#e8ecf5;color:#172b4d}}
+.rank-badge.top3{{background:#f4e3c1;color:#974900}}
 @media(max-width:900px){
   .kpi-grid{grid-template-columns:repeat(2,1fr);}
   .progress-card,.two-col,.three-col{grid-template-columns:1fr;}
@@ -701,6 +741,337 @@ function applyDetallFilter() {
     </tr>`).join('');
   if (count) count.textContent = deals.length + ' negocio' + (deals.length !== 1 ? 's' : '');
 }
+
+/* ════════ NEGOCIOS · charts + matriz ordenable ════════ */
+const ORIGIN_LABEL_MAP = {{
+  "Inbound":"Inbound","Ventas_Prospeccion":"Ventas Prospección",
+  "VENTAS Prospección":"Ventas Prospección","SDR_Prospeccion":"SDR Prospección",
+  "Outbound_A8":"Outbound A8","Outbound_ZM":"Outbound ZM",
+  "WhatsApp_Chat":"WhatsApp Chat","WhatsApp Chat":"WhatsApp Chat",
+  "Referidos":"Referidos","Resellers":"Resellers","Alianzas":"Alianzas",
+  "Email_marketing":"Email marketing","Email marketing":"Email marketing",
+  "Eventos":"Eventos","Por_Definir":"Por Definir","Por Definir":"Por Definir",
+  "":"Sin datos"
+}};
+const CHANNEL_COLORS = ["#0052cc","#00b8d9","#36b37e","#6554c0","#ff991f","#ff5630","#00875a","#403294","#974900","#5243aa","#0747a6","#6b778c"];
+function channelLabel(s){{ return ORIGIN_LABEL_MAP[s] || (s ? s.replace(/_/g,' ') : 'Sin datos'); }}
+
+/* Aggregate _NG_DEALS by granularity. Returns {{buckets:[{{key,label,sortKey}}], byChannel:{{channel:[count...]}}, totals:[count...] }} */
+function aggregateDeals(gran){{
+  const ymd = d => d;  // already YYYY-MM-DD
+  function bucketFor(dateStr){{
+    const d = new Date(dateStr + 'T00:00:00');
+    if (gran === 'day') {{
+      return {{ key: ymd(dateStr), label: d.toLocaleDateString('es-MX',{{day:'2-digit',month:'short'}}), sortKey: dateStr }};
+    }}
+    if (gran === 'month') {{
+      const y = d.getFullYear(); const m = d.getMonth();
+      const key = y + '-' + String(m+1).padStart(2,'0');
+      const label = d.toLocaleDateString('es-MX',{{month:'short', year:'2-digit'}});
+      return {{ key, label, sortKey: key }};
+    }}
+    // week — ISO-ish: take Monday as start
+    const tmp = new Date(d);
+    const day = (tmp.getDay() + 6) % 7; // 0 = Mon
+    tmp.setDate(tmp.getDate() - day);
+    const key = tmp.toISOString().slice(0,10);
+    const end = new Date(tmp); end.setDate(end.getDate()+6);
+    const fmt = x => String(x.getDate()).padStart(2,'0')+'/'+String(x.getMonth()+1).padStart(2,'0');
+    return {{ key, label: fmt(tmp)+'–'+fmt(end), sortKey: key }};
+  }}
+  const bucketMap = new Map(); // key → {{label, sortKey}}
+  const channelBuckets = new Map(); // channel → Map(key → count)
+  const totalBuckets = new Map();
+  for (const dl of _NG_DEALS){{
+    if (!dl.d) continue;
+    const b = bucketFor(dl.d);
+    if (!bucketMap.has(b.key)) bucketMap.set(b.key, b);
+    totalBuckets.set(b.key, (totalBuckets.get(b.key)||0)+1);
+    const ch = channelLabel(dl.src);
+    if (!channelBuckets.has(ch)) channelBuckets.set(ch, new Map());
+    const cm = channelBuckets.get(ch);
+    cm.set(b.key, (cm.get(b.key)||0)+1);
+  }}
+  const buckets = [...bucketMap.values()].sort((a,b)=>a.sortKey.localeCompare(b.sortKey));
+  const totals = buckets.map(b => totalBuckets.get(b.key) || 0);
+  const byChannel = {{}};
+  for (const [ch, cm] of channelBuckets.entries()){{
+    byChannel[ch] = buckets.map(b => cm.get(b.key) || 0);
+  }}
+  return {{ buckets, totals, byChannel }};
+}}
+
+/* ── Gráfico: Nuevos negocios en el tiempo ── */
+let _trendChart = null;
+let _trendGran = 'week';
+function renderTrendChart(){{
+  const agg = aggregateDeals(_trendGran);
+  const ctx = document.getElementById('chartTrend');
+  if (!ctx) return;
+  const labels = agg.buckets.map(b => b.label);
+  const data = agg.totals;
+  const total = data.reduce((a,b)=>a+b,0);
+  const max = Math.max(...data, 0);
+  const avg = data.length ? (total/data.length) : 0;
+  const lastLabel = _trendGran === 'day' ? 'hoy' : (_trendGran === 'week' ? 'esta semana' : 'este mes');
+  const last = data[data.length-1] || 0;
+  const prev = data[data.length-2] || 0;
+  const delta = prev ? ((last-prev)/prev*100) : 0;
+  const summary = document.getElementById('trendSummary');
+  if (summary){{
+    const pill = (delta>=0?'▲':'▼') + ' ' + Math.abs(delta).toFixed(0) + '%';
+    const color = delta>=0 ? '#006644' : '#bf2600';
+    summary.innerHTML =
+      `<span>Total período: <strong>${{total}}</strong></span>`+
+      `<span>Promedio: <strong>${{avg.toFixed(1)}}</strong></span>`+
+      `<span>Pico: <strong>${{max}}</strong></span>`+
+      `<span>${{lastLabel}}: <strong>${{last}}</strong> <span style="color:${{color}};font-weight:700">${{prev?pill:''}}</span></span>`;
+  }}
+  const sub = document.getElementById('trend-sub');
+  if (sub) sub.textContent = 'Total de negocios creados por ' + (_trendGran==='day'?'día':(_trendGran==='week'?'semana':'mes')) + ' · ' + total + ' negocios';
+
+  if (_trendChart){{ _trendChart.destroy(); }}
+  _trendChart = new Chart(ctx, {{
+    type: 'bar',
+    data: {{
+      labels,
+      datasets: [{{
+        label: 'Nuevos negocios',
+        data,
+        backgroundColor: data.map((v,i) => i === data.length-1 ? '#00b8d9' : '#0052cc'),
+        borderRadius: 4,
+        maxBarThickness: 40
+      }}]
+    }},
+    options: {{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{{
+        legend:{{display:false}},
+        tooltip:{{ callbacks:{{ label:(c)=>`${{c.parsed.y}} negocios` }} }}
+      }},
+      scales:{{
+        x:{{ grid:{{display:false}}, ticks:{{autoSkip:true, maxRotation:45, minRotation:0, font:{{size:10}}}} }},
+        y:{{ beginAtZero:true, ticks:{{precision:0, font:{{size:10}}}}, grid:{{color:'#eee'}} }}
+      }}
+    }}
+  }});
+}}
+function setTrendGran(g, btn){{
+  _trendGran = g;
+  document.querySelectorAll('#negocios .seg-control').forEach(sc => {{
+    if (sc.querySelector('[onclick^="setTrendGran"]')){{
+      sc.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('on', b === btn));
+    }}
+  }});
+  renderTrendChart();
+}}
+
+/* ── Gráfico: Evolución por canal ── */
+let _channelChart = null;
+let _channelGran = 'week';
+let _channelVisible = {{}}; // channel → bool
+function renderChannelChart(){{
+  const agg = aggregateDeals(_channelGran);
+  const ctx = document.getElementById('chartChannels');
+  if (!ctx) return;
+  const labels = agg.buckets.map(b => b.label);
+  // Order channels by total desc for color stability
+  const channelTotals = Object.entries(agg.byChannel)
+    .map(([ch, arr]) => [ch, arr.reduce((a,b)=>a+b,0)])
+    .sort((a,b)=>b[1]-a[1]);
+  const channels = channelTotals.map(x => x[0]);
+  // Initialize visibility for new channels: default show only top 5 to keep chart legible
+  channels.forEach((ch,i) => {{
+    if (_channelVisible[ch] === undefined) _channelVisible[ch] = i < 5;
+  }});
+  const datasets = channels.map((ch, i) => ({{
+    label: ch,
+    data: agg.byChannel[ch],
+    borderColor: CHANNEL_COLORS[i % CHANNEL_COLORS.length],
+    backgroundColor: CHANNEL_COLORS[i % CHANNEL_COLORS.length] + '22',
+    borderWidth: 2,
+    tension: 0.3,
+    pointRadius: 2,
+    pointHoverRadius: 5,
+    hidden: !_channelVisible[ch],
+    fill: false
+  }}));
+  if (_channelChart){{ _channelChart.destroy(); }}
+  _channelChart = new Chart(ctx, {{
+    type: 'line',
+    data: {{ labels, datasets }},
+    options: {{
+      responsive:true, maintainAspectRatio:false, interaction:{{mode:'index', intersect:false}},
+      plugins:{{
+        legend:{{display:false}},
+        tooltip:{{
+          callbacks:{{
+            title: (items) => items[0].label,
+            label: (c) => c.dataset.label + ': ' + c.parsed.y
+          }}
+        }}
+      }},
+      scales:{{
+        x:{{ grid:{{display:false}}, ticks:{{autoSkip:true, maxRotation:45, minRotation:0, font:{{size:10}}}} }},
+        y:{{ beginAtZero:true, ticks:{{precision:0, font:{{size:10}}}}, grid:{{color:'#eee'}} }}
+      }}
+    }}
+  }});
+  // Build legend with toggles
+  const legendEl = document.getElementById('channelLegend');
+  if (legendEl){{
+    legendEl.innerHTML = channels.map((ch, i) => {{
+      const color = CHANNEL_COLORS[i % CHANNEL_COLORS.length];
+      const total = channelTotals[i][1];
+      const off = _channelVisible[ch] ? '' : 'off';
+      return `<span class="channel-chip ${{off}}" onclick="toggleChannel('${{ch.replace(/'/g,"\\\'")}}'`, this)"><span class="dot" style="background:${{color}}"></span>${{ch}} <span style="color:var(--muted);font-weight:500">· ${{total}}</span></span>`;
+    }}).join('');
+  }}
+  const sub = document.getElementById('channel-sub');
+  if (sub) sub.textContent = 'Evolución por fuente de origen · agrupado por ' + (_channelGran==='day'?'día':(_channelGran==='week'?'semana':'mes'));
+}}
+function toggleChannel(ch, el){{
+  _channelVisible[ch] = !_channelVisible[ch];
+  if (el) el.classList.toggle('off', !_channelVisible[ch]);
+  if (_channelChart){{
+    _channelChart.data.datasets.forEach(ds => {{
+      if (ds.label === ch) ds.hidden = !_channelVisible[ch];
+    }});
+    _channelChart.update();
+  }}
+}}
+function toggleAllChannels(show){{
+  Object.keys(_channelVisible).forEach(k => _channelVisible[k] = show);
+  renderChannelChart();
+}}
+function showTopChannels(n){{
+  const agg = aggregateDeals(_channelGran);
+  const sorted = Object.entries(agg.byChannel)
+    .map(([ch, arr]) => [ch, arr.reduce((a,b)=>a+b,0)])
+    .sort((a,b)=>b[1]-a[1]);
+  Object.keys(_channelVisible).forEach(k => _channelVisible[k] = false);
+  sorted.slice(0, n).forEach(([ch]) => _channelVisible[ch] = true);
+  renderChannelChart();
+}}
+function setChannelGran(g, btn){{
+  _channelGran = g;
+  document.querySelectorAll('#negocios .seg-control').forEach(sc => {{
+    if (sc.querySelector('[onclick^="setChannelGran"]')){{
+      sc.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('on', b === btn));
+    }}
+  }});
+  renderChannelChart();
+}}
+
+/* ── Vendor matrix: compute data-* attrs, sort, add rank badges ── */
+function enhanceVendorMatrix(){{
+  const table = document.getElementById('vendor-matrix');
+  if (!table) return;
+  const rows = [...table.querySelectorAll('tbody tr.vrow')];
+  rows.forEach(tr => {{
+    const cells = [...tr.querySelectorAll('.wk-cell')];
+    const weekly = cells.map(c => {{
+      const n = parseInt((c.textContent||'').trim(), 10);
+      return isNaN(n) ? 0 : n;
+    }});
+    const total = weekly.reduce((a,b)=>a+b,0);
+    const last = weekly[weekly.length-1] || 0;
+    const active = weekly.filter(v => v>0).length || 1;
+    const avg = total / (weekly.length || 1);
+    // tendencia = últimas 4 vs 4 previas
+    const half = 4;
+    const recent = weekly.slice(-half).reduce((a,b)=>a+b,0);
+    const older  = weekly.slice(-half*2, -half).reduce((a,b)=>a+b,0) || 0.0001;
+    const trend  = ((recent - older) / older) * 100;
+    tr.dataset.total = total;
+    tr.dataset.last = last;
+    tr.dataset.avg = avg.toFixed(2);
+    tr.dataset.trend = trend.toFixed(2);
+    weekly.forEach((v, i) => {{ tr.dataset['w'+i] = v; }});
+    // Enhance total cell visually
+    const totalCell = tr.querySelector('.vtotal');
+    if (totalCell) totalCell.classList.add('vtotal-cell');
+  }});
+  // Click handlers on headers
+  const headers = table.querySelectorAll('thead th[data-sort]');
+  headers.forEach(th => {{
+    th.addEventListener('click', () => {{
+      const key = th.dataset.sort;
+      const currentDir = th.classList.contains('sorted-desc') ? 'desc' : (th.classList.contains('sorted-asc') ? 'asc' : null);
+      const nextDir = currentDir === 'desc' ? 'asc' : 'desc';
+      headers.forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+      th.classList.add(nextDir === 'desc' ? 'sorted-desc' : 'sorted-asc');
+      // Sync select when header matches a preset option
+      const sel = document.getElementById('vendor-sort-mode');
+      if (sel){{
+        if (key === 'total') sel.value = 'total-' + nextDir;
+        else if (key === 'name') sel.value = 'name-' + nextDir;
+      }}
+      applySort(key, nextDir);
+    }});
+  }});
+  // Default sort: total desc
+  applySort('total','desc');
+}}
+function applySort(key, dir){{
+  const table = document.getElementById('vendor-matrix');
+  if (!table) return;
+  const tbody = table.querySelector('tbody');
+  const rows = [...tbody.querySelectorAll('tr.vrow')];
+  const sign = dir === 'asc' ? 1 : -1;
+  const keyFn = (tr) => {{
+    if (key === 'name') return (tr.dataset.vendor || '').toLowerCase();
+    if (key === 'total') return +tr.dataset.total;
+    if (key === 'last') return +tr.dataset.last;
+    if (key === 'avg') return +tr.dataset.avg;
+    if (key === 'trend') return +tr.dataset.trend;
+    if (key && key.startsWith('w')) return +tr.dataset[key];
+    return 0;
+  }};
+  rows.sort((a,b) => {{
+    const av = keyFn(a), bv = keyFn(b);
+    if (typeof av === 'string') return sign * av.localeCompare(bv, 'es');
+    return sign * (av - bv);
+  }});
+  rows.forEach((r, i) => {{
+    tbody.appendChild(r);
+    // Rank badge
+    const vn = r.querySelector('.vname');
+    if (vn){{
+      const existing = vn.querySelector('.rank-badge');
+      if (existing) existing.remove();
+      const badge = document.createElement('span');
+      badge.className = 'rank-badge' + (i===0?' top':(i===1?' top2':(i===2?' top3':'')));
+      badge.textContent = '#' + (i+1);
+      const dot = vn.querySelector('.quota-dot');
+      if (dot) vn.insertBefore(badge, dot.nextSibling);
+      else vn.insertBefore(badge, vn.firstChild);
+    }}
+  }});
+}}
+function sortVendorMatrix(){{
+  const sel = document.getElementById('vendor-sort-mode');
+  if (!sel) return;
+  const [key, dir] = sel.value.split('-');
+  // Update header indicator
+  const table = document.getElementById('vendor-matrix');
+  table.querySelectorAll('thead th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+  const th = table.querySelector(`thead th[data-sort="${{key}}"]`);
+  if (th) th.classList.add(dir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+  applySort(key, dir);
+}}
+
+// Init
+document.addEventListener('DOMContentLoaded', function() {{
+  const lastBtn = document.querySelector('.week-sidebar-btn.active');
+  showWeek(16, lastBtn);
+  // Nuevos charts + matriz vendedores
+  if (window.Chart){{
+    try {{ renderTrendChart(); }} catch(e){{ console.error('trend', e); }}
+    try {{ renderChannelChart(); }} catch(e){{ console.error('channels', e); }}
+  }}
+  try {{ enhanceVendorMatrix(); }} catch(e){{ console.error('matrix', e); }}
+}});
 """
 
 
@@ -901,7 +1272,7 @@ def build_html(data, update_time):
     # ── TAB 3: Negocios — matrix ──────────────────────────────────────────────
     n_weeks  = len(sw)
     wk_hdrs  = "".join(
-        f'<th class="wk-th">{sw[i].split("·")[1].strip() if "·" in sw[i] else sw[i]}</th>'
+        f'<th class="wk-th" data-sort="w{i}" title="Click para ordenar por esta semana">{sw[i].split("·")[1].strip() if "·" in sw[i] else sw[i]}</th>'
         for i in range(n_weeks)
     )
     matrix_rows = []
@@ -917,20 +1288,19 @@ def build_html(data, update_time):
             f'<tr class="vrow vrow-quota" data-vendor="{name}">'
             f'<td class="vname"><span class="quota-dot"></span>{name}</td>'
             f'{cells}'
-            f'<td class="vtotal">{tot}</td>'
+            f'<td class="vtotal vtotal-cell">{tot}</td>'
             f'</tr>'
         )
 
     # Week totals row
     tot_cells = "".join(
-        f'<td class="wk-cell" style="font-weight:700;background:#f8f9fc">{wt.get(i,"")}</td>'
+        f'<td>{wt.get(i,"")}</td>'
         for i in range(n_weeks)
     )
     totals_row = (
-        f'<tr style="background:#f8f9fc;border-top:2px solid var(--border)">'
-        f'<td class="vname" style="font-weight:700;color:var(--muted)">TOTAL</td>'
+        f'<tr><td class="vname">TOTAL</td>'
         f'{tot_cells}'
-        f'<td class="vtotal">{sum(wt.values())}</td>'
+        f'<td class="vtotal-cell">{sum(wt.values())}</td>'
         f'</tr>'
     )
 
@@ -1000,6 +1370,8 @@ def build_html(data, update_time):
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Forecast Q2 2026 — MX Sales</title>
 <style>{CSS}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-date-fns/3.0.0/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 <body>
 
@@ -1217,43 +1589,90 @@ def build_html(data, update_time):
   <div class="two-col" style="margin-bottom:18px">
 
     <div class="card card-pad">
-      <div class="section-title">📊 Origen de negocios nuevos</div>
-      <div class="section-sub">{len(ng)} negocios desde dic 29, 2025 · {len(src_sorted)} fuentes</div>
-      <div class="src-chart">
-{src_chart_html}
+      <div class="neg-card-header">
+        <div>
+          <div class="section-title">📈 Nuevos negocios por canal</div>
+          <div class="section-sub" id="channel-sub">Evolución por fuente de origen</div>
+        </div>
+        <div class="seg-control" role="tablist" aria-label="Granularidad canal">
+          <button class="seg-btn" data-gran="day" onclick="setChannelGran('day', this)">Día</button>
+          <button class="seg-btn on" data-gran="week" onclick="setChannelGran('week', this)">Semana</button>
+          <button class="seg-btn" data-gran="month" onclick="setChannelGran('month', this)">Mes</button>
+        </div>
       </div>
+      <div class="chart-box tall"><canvas id="chartChannels"></canvas></div>
+      <div class="channel-actions" style="margin-top:10px">
+        <button class="mini-btn" onclick="toggleAllChannels(true)">Mostrar todos</button>
+        <button class="mini-btn" onclick="toggleAllChannels(false)">Ocultar todos</button>
+        <button class="mini-btn" onclick="showTopChannels(5)">Top 5 canales</button>
+      </div>
+      <div class="channel-legend" id="channelLegend"></div>
     </div>
 
     <div class="card card-pad">
-      <div class="section-title">📈 Nuevos negocios por semana</div>
-      <div class="section-sub">Total por semana desde semana 1</div>
-      <div class="trend-chart">
-{trend_html}
+      <div class="neg-card-header">
+        <div>
+          <div class="section-title">📊 Nuevos negocios en el tiempo</div>
+          <div class="section-sub" id="trend-sub">Total de negocios creados</div>
+        </div>
+        <div class="seg-control" role="tablist" aria-label="Granularidad">
+          <button class="seg-btn" data-gran="day" onclick="setTrendGran('day', this)">Día</button>
+          <button class="seg-btn on" data-gran="week" onclick="setTrendGran('week', this)">Semana</button>
+          <button class="seg-btn" data-gran="month" onclick="setTrendGran('month', this)">Mes</button>
+        </div>
       </div>
+      <div class="chart-box tall"><canvas id="chartTrend"></canvas></div>
+      <div class="chart-summary" id="trendSummary"></div>
     </div>
 
   </div>
 
   <div class="table-wrap">
     <div class="table-toolbar">
-      <h3>Nuevos negocios por vendedor × semana</h3>
+      <h3>👥 Nuevos negocios por vendedor × semana</h3>
       <div class="toolbar-right">
+        <div class="heat-legend" title="Escala de calor por celda">
+          <span>Bajo</span>
+          <div class="heat-scale">
+            <span style="background:#fff"></span>
+            <span style="background:#e9f0ff"></span>
+            <span style="background:#b3ccff"></span>
+            <span style="background:#5c97ff"></span>
+            <span style="background:#1a5fd4"></span>
+            <span style="background:#03306e"></span>
+          </div>
+          <span>Alto</span>
+        </div>
+        <select class="filter-select" id="vendor-sort-mode" onchange="sortVendorMatrix()">
+          <option value="total-desc">Ordenar: Total ↓ (mejor→peor)</option>
+          <option value="total-asc">Total ↑ (peor→mejor)</option>
+          <option value="last-desc">Última semana ↓</option>
+          <option value="last-asc">Última semana ↑</option>
+          <option value="avg-desc">Promedio semanal ↓</option>
+          <option value="avg-asc">Promedio semanal ↑</option>
+          <option value="trend-desc">Tendencia 4 sem ↓</option>
+          <option value="trend-asc">Tendencia 4 sem ↑</option>
+          <option value="name-asc">Nombre A→Z</option>
+          <option value="name-desc">Nombre Z→A</option>
+        </select>
         <input class="search-input" placeholder="Filtrar vendedor…" oninput="filterNegocios()" id="filter-negocios-vendor">
       </div>
     </div>
-    <div style="overflow-x:auto">
-    <table class="vendor-matrix">
+    <div class="vendor-matrix-wrap">
+    <table class="vendor-matrix" id="vendor-matrix">
       <thead>
         <tr>
-          <th class="vname">Vendedor</th>
+          <th class="vname" data-sort="name" title="Click para ordenar por nombre">Vendedor</th>
 {wk_hdrs}
-          <th>Total</th>
+          <th data-sort="total" class="sorted-desc" title="Click para ordenar por total">Total</th>
         </tr>
       </thead>
       <tbody>
 {matrix_rows_html}
-{totals_row}
       </tbody>
+      <tfoot>
+{totals_row}
+      </tfoot>
     </table>
     </div>
   </div>
