@@ -416,152 +416,446 @@ def process_data(owners, raw_q2, raw_new):
 # ─── HTML generation ──────────────────────────────────────────────────────────
 
 CSS = """
+/* ═════════ DESIGN TOKENS — Enterprise Modern ═════════ */
 :root {
-  --blue:#0052cc; --blue-lt:#e9f0ff; --teal:#00b8d9; --green:#36b37e;
-  --green-dk:#00875a; --purple:#6554c0; --purple-lt:#f3f0ff;
-  --orange:#ff991f; --red:#ff5630; --red-dk:#bf2600;
-  --bg:#f4f5f7; --card:#fff; --text:#172b4d; --muted:#6b778c; --border:#dfe1e6;
-  --radius:10px; --shadow:0 1px 4px rgba(0,0,0,.08);
+  /* Brand */
+  --blue-600:#0747a6; --blue-500:#0052cc; --blue-400:#2684ff; --blue-100:#deebff; --blue-50:#e9f0ff;
+  --teal-500:#00b8d9; --teal-100:#b3f5ff;
+  --purple-500:#6554c0; --purple-400:#8777d9; --purple-100:#eae6ff; --purple-50:#f3f0ff;
+  --green-600:#006644; --green-500:#00875a; --green-400:#36b37e; --green-100:#e3fcef;
+  --amber-500:#ff991f; --amber-600:#974900; --amber-100:#fff4e5;
+  --red-600:#bf2600; --red-500:#de350b; --red-400:#ff5630; --red-100:#ffebe6;
+  /* Neutrals */
+  --ink-900:#091e42; --ink-800:#172b4d; --ink-700:#253858; --ink-600:#344563;
+  --ink-500:#5e6c84; --ink-400:#8993a4; --ink-300:#b3bac5; --ink-200:#dfe1e6;
+  --ink-100:#ebecf0; --ink-50:#f4f5f7; --ink-25:#fafbfc; --ink-0:#ffffff;
+  /* Semantic */
+  --bg:var(--ink-25); --surface:var(--ink-0); --surface-muted:var(--ink-50); --surface-hover:#fafbff;
+  --border:var(--ink-200); --border-muted:var(--ink-100);
+  --text:var(--ink-800); --text-muted:var(--ink-500); --text-subtle:var(--ink-400);
+  --accent:var(--blue-500); --accent-hover:var(--blue-600); --accent-soft:var(--blue-50);
+  /* Backcompat */
+  --blue:var(--blue-500); --blue-lt:var(--blue-50); --teal:var(--teal-500);
+  --green:var(--green-400); --green-dk:var(--green-500); --purple:var(--purple-500);
+  --purple-lt:var(--purple-50); --orange:var(--amber-500); --red:var(--red-400); --red-dk:var(--red-600);
+  --card:var(--surface); --muted:var(--text-muted);
+  /* Type */
+  --font-sans:'Inter','SF Pro Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;
+  /* Shape + motion */
+  --r-xs:4px; --r-sm:6px; --r-md:10px; --r-lg:14px; --r-pill:999px;
+  --radius:var(--r-md);
+  --shadow-xs:0 1px 1px rgba(9,30,66,.04);
+  --shadow-sm:0 1px 2px rgba(9,30,66,.06),0 0 0 1px rgba(9,30,66,.03);
+  --shadow-md:0 4px 12px -2px rgba(9,30,66,.10),0 2px 4px -1px rgba(9,30,66,.05);
+  --shadow-lg:0 16px 32px -8px rgba(9,30,66,.14),0 4px 8px -2px rgba(9,30,66,.06);
+  --shadow:var(--shadow-sm);
+  --ease:cubic-bezier(.2,.8,.2,1);
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;}
-.header{background:linear-gradient(135deg,#0052cc,#0747a6);color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;}
-.header h1{font-size:1.35rem;font-weight:700;}
-.header-meta{font-size:.78rem;opacity:.75;margin-top:3px;}
-.header-right{text-align:right;font-size:.78rem;opacity:.8;}
-.tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 32px;display:flex;position:sticky;top:0;z-index:50;box-shadow:0 1px 4px rgba(0,0,0,.05);}
-.tab-btn{padding:13px 20px;font-size:.88rem;font-weight:600;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s;}
-.tab-btn:hover{color:var(--blue);}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);}
-.page{display:none;max-width:1300px;margin:0 auto;padding:20px 32px 40px;}
-.page.active{display:block;}
-.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  font-size:14px;
+  line-height:1.5;
+  font-feature-settings:"cv11","ss01","ss03";
+}
+/* Tabular figures wherever numbers live */
+.kpi-value,.prog-val,.team-row-val,.month-stat strong,
+.vtotal,.vtotal-cell,.chart-summary strong,.vendor-matrix,
+.src-count,.trend-val,.header-right,#week-deal-table td,
+table td,.badge,.risk-badge,.stage-pill,.quota-attainment,
+.rank-badge,.delta-chip,.metric-value,.days-chip{font-variant-numeric:tabular-nums;}
+
+/* ═════════ HEADER ═════════ */
+.header{
+  background:linear-gradient(135deg,#0b1d3d 0%,#142b5e 55%,#1e3a8a 100%);
+  color:#fff;padding:22px 32px;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;overflow:hidden;
+}
+.header::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(1000px 200px at 80% -50%,rgba(38,132,255,.25),transparent);
+  pointer-events:none;
+}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.022em;position:relative;z-index:1;line-height:1.1;}
+.header-eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;opacity:.75;margin-bottom:6px;display:flex;align-items:center;gap:8px;position:relative;z-index:1;}
+.header-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#5aff9f;box-shadow:0 0 0 3px rgba(90,255,159,.18);animation:pulse 1.8s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 3px rgba(90,255,159,.18);}50%{opacity:.75;box-shadow:0 0 0 5px rgba(90,255,159,.08);}}
+.header-meta{font-size:.78rem;opacity:.72;margin-top:6px;font-weight:500;position:relative;z-index:1;}
+.header-meta .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5aff9f;margin:0 8px 1px;vertical-align:middle;box-shadow:0 0 0 3px rgba(90,255,159,.18);}
+.header-right{text-align:right;font-size:.78rem;opacity:.95;position:relative;z-index:1;}
+.header-right .hr-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.9px;opacity:.7;font-weight:600;}
+.header-right .hr-value{font-size:1.6rem;font-weight:700;letter-spacing:-0.02em;margin-top:3px;line-height:1.05;}
+.header-right .hr-unit{font-size:.75rem;font-weight:600;opacity:.55;margin-left:2px;}
+.header-right .hr-sub{font-size:.72rem;opacity:.7;margin-top:4px;}
+
+/* Q-progress band: quarter-pace indicator */
+.q-progress{padding:14px 32px 16px;background:linear-gradient(180deg,#0b1220,#0f1a33);color:#c7d2fe;border-bottom:1px solid #1f2a4d;font-size:.78rem;}
+.q-progress .qp-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.q-progress .qp-label{font-weight:500;opacity:.85;}
+.q-progress .qp-label strong{color:#fff;font-weight:700;letter-spacing:-0.005em;}
+.q-progress .qp-bar{position:relative;height:6px;background:rgba(255,255,255,.07);border-radius:99px;}
+.q-progress .qp-fill{height:100%;background:linear-gradient(90deg,var(--blue-400),var(--teal-500));border-radius:99px;transition:width .6s var(--ease);box-shadow:0 0 12px rgba(51,153,255,.35);}
+.q-progress .qp-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--green-500);box-shadow:0 0 0 3px rgba(28,196,108,.22),0 2px 6px rgba(0,0,0,.3);cursor:help;z-index:2;}
+.q-progress .qp-legend{display:flex;justify-content:space-between;font-size:.66rem;opacity:.55;margin-top:6px;font-weight:500;}
+.q-progress .delta-chip{margin:0;font-size:.7rem;padding:3px 9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;}
+.q-progress .delta-chip.delta-up{background:rgba(28,196,108,.16);color:#7bf0ad;border-color:rgba(28,196,108,.35);}
+.q-progress .delta-chip.delta-down{background:rgba(232,81,81,.16);color:#ffaab0;border-color:rgba(232,81,81,.35);}
+
+/* ═════════ TAB BAR ═════════ */
+.tab-bar{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  display:flex;
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 1px 0 rgba(9,30,66,.04),0 8px 16px -12px rgba(9,30,66,.10);
+}
+.tab-btn{
+  padding:14px 20px;font-size:.85rem;font-weight:600;
+  color:var(--text-muted);border:none;background:none;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color .2s var(--ease),border-color .2s var(--ease);
+  letter-spacing:-0.005em;
+}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* ═════════ PAGE ═════════ */
+.page{display:none;max-width:1340px;margin:0 auto;padding:24px 32px 48px;}
+.page.active{display:block;animation:fadeIn .2s var(--ease);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+/* ═════════ CARDS ═════════ */
+.card{background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);}
 .card-pad{padding:18px 22px;}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
-.kpi{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:16px 20px;box-shadow:var(--shadow);}
-.kpi-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin-bottom:6px;}
-.kpi-value{font-size:1.65rem;font-weight:700;line-height:1.1;}
-.kpi-sub{font-size:.72rem;color:var(--muted);margin-top:5px;}
-.kpi.k-blue{border-top:3px solid var(--blue);}
-.kpi.k-purple{border-top:3px solid var(--purple);}
-.kpi.k-teal{border-top:3px solid var(--teal);}
-.kpi.k-orange{border-top:3px solid var(--orange);}
-.kpi.k-red{border-top:3px solid var(--red);}
-.progress-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:18px 22px;margin-bottom:18px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr;gap:28px;}
-.prog-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:6px;}
-.prog-val{font-size:1rem;font-weight:700;margin-bottom:6px;}
-.prog-bar{height:10px;background:#eee;border-radius:6px;overflow:hidden;margin-bottom:4px;}
-.prog-fill{height:100%;border-radius:6px;}
-.prog-meta{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);}
-.prog-stacked{display:flex;height:10px;border-radius:6px;overflow:hidden;background:#eee;margin-bottom:4px;gap:2px;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;}
-.team-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:16px 20px;box-shadow:var(--shadow);}
-.team-name{font-size:1rem;font-weight:700;margin-bottom:12px;}
-.team-row{margin-bottom:10px;}
-.team-row-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
-.team-row-label{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
-.team-row-val{font-size:.82rem;font-weight:700;}
-.month-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:14px 18px;box-shadow:var(--shadow);}
-.month-name{font-size:.9rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
-.month-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.month-stat{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:3px;}
-.month-stat strong{color:var(--text);}
-.table-wrap{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;}
-.table-toolbar{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap;}
-.table-toolbar h3{font-size:.9rem;font-weight:700;}
+
+/* ═════════ INSIGHTS STRIP (headline facts) ═════════ */
+.insights-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.insight{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;display:flex;gap:11px;align-items:flex-start;box-shadow:var(--shadow-xs);transition:box-shadow .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);}
+.insight:hover{box-shadow:var(--shadow-sm);border-color:var(--ink-300);transform:translateY(-1px);}
+.insight-icon{font-size:1.15rem;line-height:1.2;flex-shrink:0;filter:grayscale(.15);}
+.insight-body{min-width:0;flex:1;}
+.insight-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);font-weight:700;margin-bottom:3px;}
+.insight-val{font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.012em;line-height:1.25;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.insight-val .delta-chip{font-size:.62rem;padding:1px 6px;margin-left:0;vertical-align:baseline;}
+.insight-sub{font-size:.68rem;color:var(--text-muted);margin-top:3px;line-height:1.35;}
+
+/* ═════════ KPI CARDS ═════════ */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.kpi{
+  background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);
+  padding:18px 20px;box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden;
+  transition:box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease);
+}
+.kpi:hover{box-shadow:var(--shadow-md);border-color:var(--ink-300);}
+.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);border-radius:var(--r-md) var(--r-md) 0 0;}
+.kpi.k-blue::before{background:linear-gradient(90deg,var(--blue-500),var(--blue-400));}
+.kpi.k-purple::before{background:linear-gradient(90deg,var(--purple-500),var(--purple-400));}
+.kpi.k-teal::before{background:linear-gradient(90deg,var(--teal-500),#5ac8d9);}
+.kpi.k-orange::before{background:linear-gradient(90deg,var(--amber-500),#ffb84d);}
+.kpi.k-red::before{background:linear-gradient(90deg,var(--red-500),var(--red-400));}
+.kpi-label{
+  font-size:.66rem;text-transform:uppercase;letter-spacing:.9px;
+  color:var(--text-muted);font-weight:700;margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.kpi-value{
+  font-size:1.9rem;font-weight:700;line-height:1.05;
+  letter-spacing:-0.025em;color:var(--text);
+}
+.kpi-sub{font-size:.72rem;color:var(--text-muted);margin-top:7px;line-height:1.45;}
+.kpi-sub strong{color:var(--text);font-weight:600;}
+
+/* Delta chips (for KPI deltas or trends) */
+.delta-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:2px 7px;border-radius:var(--r-pill);
+  font-size:.68rem;font-weight:700;line-height:1.2;
+  margin-left:6px;vertical-align:2px;
+}
+.delta-up{background:var(--green-100);color:var(--green-600);}
+.delta-down{background:var(--red-100);color:var(--red-600);}
+.delta-flat{background:var(--ink-100);color:var(--text-muted);}
+
+/* ═════════ PROGRESS ═════════ */
+.progress-card{
+  background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);
+  padding:22px 26px;margin-bottom:20px;box-shadow:var(--shadow-sm);
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+}
+.prog-label{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--text-muted);margin-bottom:8px;
+}
+.prog-val{font-size:1rem;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em;}
+.prog-bar{height:8px;background:var(--ink-100);border-radius:var(--r-pill);overflow:hidden;margin-bottom:6px;}
+.prog-fill{height:100%;border-radius:var(--r-pill);transition:width .6s var(--ease);}
+.prog-meta{display:flex;justify-content:space-between;font-size:.68rem;color:var(--text-muted);}
+.prog-stacked{display:flex;height:8px;border-radius:var(--r-pill);overflow:hidden;background:var(--ink-100);margin-bottom:6px;gap:2px;}
+
+/* ═════════ LAYOUT ═════════ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+
+/* ═════════ TEAM CARDS ═════════ */
+.team-card{
+  background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);
+  padding:20px 24px;box-shadow:var(--shadow-sm);
+  transition:box-shadow .2s var(--ease);
+}
+.team-card:hover{box-shadow:var(--shadow-md);}
+.team-name{font-size:1rem;font-weight:700;margin-bottom:14px;letter-spacing:-0.01em;display:flex;align-items:center;gap:6px;}
+.team-row{margin-bottom:14px;}
+.team-row:last-child{margin-bottom:0;}
+.team-row-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px;}
+.team-row-label{font-size:.66rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+.team-row-val{font-size:.86rem;font-weight:700;letter-spacing:-0.005em;}
+
+/* ═════════ MONTH CARDS ═════════ */
+.month-card{
+  background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);
+  padding:16px 18px;box-shadow:var(--shadow-sm);
+  transition:box-shadow .2s var(--ease),transform .2s var(--ease);
+}
+.month-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.month-name{font-size:.92rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;letter-spacing:-0.008em;}
+.month-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 3px rgba(0,0,0,.02);}
+.month-stat{display:flex;justify-content:space-between;font-size:.76rem;color:var(--text-muted);margin-bottom:5px;}
+.month-stat strong{color:var(--text);font-weight:600;}
+
+/* ═════════ TABLES ═════════ */
+.table-wrap{background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);overflow:hidden;}
+.table-toolbar{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap;}
+.table-toolbar h3{font-size:.94rem;font-weight:700;letter-spacing:-0.01em;color:var(--text);}
 .toolbar-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.search-input{padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:.8rem;width:180px;}
-.search-input:focus{outline:none;border-color:var(--blue);}
-.filter-select{padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:.8rem;background:#fff;cursor:pointer;}
+
+.search-input,.filter-select{
+  padding:7px 11px;border:1px solid var(--border);
+  border-radius:var(--r-sm);font-size:.8rem;
+  font-family:inherit;color:var(--text);background:var(--surface);
+  transition:border-color .15s var(--ease),box-shadow .15s var(--ease);
+}
+.search-input{width:200px;}
+.search-input:focus,.filter-select:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(0,82,204,.12);
+}
+.filter-select{cursor:pointer;padding-right:28px;}
+
 .filter-pills{display:flex;gap:6px;flex-wrap:wrap;}
-.pill{padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:.1s;}
-.pill:hover,.pill.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.pill{
+  padding:5px 12px;border-radius:var(--r-pill);border:1px solid var(--border);
+  background:var(--surface);font-size:.75rem;font-weight:600;
+  cursor:pointer;transition:.15s var(--ease);color:var(--text);
+}
+.pill:hover{border-color:var(--text-muted);}
+.pill.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+
 table{width:100%;border-collapse:collapse;}
-th{background:#f8f9fc;padding:9px 12px;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;}
-th:hover{color:var(--blue);}
-td{padding:9px 12px;font-size:.82rem;border-bottom:1px solid var(--border);vertical-align:middle;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:#fafbff;}
+th{
+  background:var(--ink-50);padding:10px 14px;
+  font-size:.66rem;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--text-muted);font-weight:700;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;cursor:pointer;text-align:left;
+  transition:color .15s var(--ease),background .15s var(--ease);
+}
+th:hover{color:var(--accent);background:#eef1f7;}
+td{padding:10px 14px;font-size:.82rem;border-bottom:1px solid var(--border-muted);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background .12s var(--ease);}
+tbody tr:hover td{background:var(--surface-hover);}
 tr.hidden{display:none;}
-.deal-link{color:var(--blue);text-decoration:none;font-weight:500;}
-.deal-link:hover{text-decoration:underline;}
-.na{color:#bbb;font-style:italic;}
-.na-cell{font-size:.78rem;color:var(--muted);}
-.small-cell{font-size:.75rem;color:var(--muted);max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.table-footer{padding:10px 14px;background:#f8f9fc;border-top:1px solid var(--border);font-size:.73rem;color:var(--muted);}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:600;}
+.deal-link{color:var(--accent);text-decoration:none;font-weight:500;border-bottom:1px dashed transparent;transition:border-color .12s;}
+.deal-link:hover{border-bottom-color:var(--accent);}
+.na{color:var(--text-subtle);font-style:italic;}
+.na-cell{font-size:.78rem;color:var(--text-muted);}
+.small-cell{font-size:.75rem;color:var(--text-muted);max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.table-footer{padding:12px 18px;background:var(--ink-50);border-top:1px solid var(--border);font-size:.73rem;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+
+/* ═════════ BADGES ═════════ */
+.badge{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:.7rem;font-weight:600;letter-spacing:-0.005em;line-height:1.35;}
 .badge-stage{white-space:nowrap;}
-.badge-vw{background:#f3f0ff;color:#5243aa;border:1px solid #c0b3f5;font-weight:700;}
-.badge-abril{background:#e9f0ff;color:#0052cc;}
-.badge-mayo{background:#e3fcef;color:#006644;}
-.badge-junio{background:#fff4e5;color:#974900;}
+.badge-vw{background:var(--purple-50);color:#5243aa;border:1px solid rgba(101,84,192,.25);font-weight:700;}
+.badge-abril{background:var(--blue-50);color:var(--blue-500);}
+.badge-mayo{background:var(--green-100);color:var(--green-600);}
+.badge-junio{background:var(--amber-100);color:#974900;}
 .badge-julio{background:#f3e8ff;color:#6b21a8;}
-.risk-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700;}
-.risk-high{background:#ffe9e4;color:var(--red-dk);}
-.risk-med{background:#fff4e5;color:#974900;}
-.risk-low{background:#e3fcef;color:#006644;}
-.contact-ok{color:var(--blue);font-size:.78rem;}
+
+/* Risk (with dot) */
+.risk-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-pill);font-size:.7rem;font-weight:700;letter-spacing:-0.005em;}
+.risk-badge::before{content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.risk-high{background:var(--red-100);color:var(--red-600);}
+.risk-high::before{background:var(--red-500);}
+.risk-med{background:var(--amber-100);color:#974900;}
+.risk-med::before{background:var(--amber-500);}
+.risk-low{background:var(--green-100);color:var(--green-600);}
+.risk-low::before{background:var(--green-500);}
+
+.contact-ok{color:var(--accent);font-size:.78rem;}
 .contact-warn{color:#974900;font-weight:600;font-size:.78rem;}
-.contact-danger{color:var(--red-dk);font-weight:700;font-size:.78rem;}
-.sidebar-item{display:flex;align-items:center;gap:9px;width:100%;padding:10px 14px;border:none;background:none;cursor:pointer;border-bottom:1px solid var(--border);transition:.1s;color:var(--text);}
-.sidebar-item:hover{background:#f4f5f7;}
-.sidebar-item.active{background:var(--blue-lt);color:var(--blue);font-weight:600;}
+.contact-danger{color:var(--red-600);font-weight:700;font-size:.78rem;}
+
+/* Days-ago chip */
+.days-chip{display:inline-block;font-size:.7rem;color:var(--text-muted);background:var(--ink-50);border:1px solid var(--border-muted);padding:1px 7px;border-radius:var(--r-pill);margin-left:4px;}
+
+/* ═════════ SIDEBARS ═════════ */
+.sidebar-item{
+  display:flex;align-items:flex-start;gap:10px;width:100%;
+  padding:10px 14px;border:none;background:none;cursor:pointer;
+  border-bottom:1px solid var(--border-muted);
+  transition:.12s var(--ease);color:var(--text);text-align:left;
+}
+.sidebar-item:hover{background:var(--ink-50);}
+.sidebar-item.active{background:var(--blue-50);color:var(--accent);font-weight:600;box-shadow:inset 3px 0 0 var(--accent);}
 .sidebar-item:last-child{border-bottom:none;}
+.sidebar-item .sb-avatar{width:28px;height:28px;border-radius:50%;font-weight:700;font-size:.7rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.sidebar-item .sb-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+.sidebar-item .sb-name{font-size:.78rem;font-weight:600;line-height:1.25;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sidebar-item.active .sb-name{color:var(--accent);}
+.sidebar-item .sb-quota{display:flex;align-items:center;gap:6px;}
+.sidebar-item .sb-quota-bar{flex:1;height:3px;background:var(--ink-100);border-radius:99px;overflow:hidden;}
+.sidebar-item .sb-quota-fill{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease);}
+.sidebar-item .sb-quota-fill.attained{background:var(--green-500);}
+.sidebar-item .sb-quota-fill.lagging{background:var(--amber-500);}
+.sidebar-item .sb-quota-fill.critical{background:var(--red-500);}
+.sidebar-item .sb-quota-val{font-size:.66rem;font-weight:700;color:var(--text-muted);min-width:30px;text-align:right;}
 .vendor-layout{display:flex;gap:16px;align-items:flex-start;}
-.vendor-sidebar{width:220px;flex-shrink:0;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow-y:auto;max-height:calc(100vh - 140px);position:sticky;top:70px;}
+.vendor-sidebar{
+  width:238px;flex-shrink:0;background:var(--surface);
+  border-radius:var(--r-md);border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);overflow-y:auto;
+  max-height:calc(100vh - 140px);position:sticky;top:70px;
+}
 .vendor-content{flex:1;min-width:0;}
-.section-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.section-sub{font-size:.76rem;color:var(--muted);margin-bottom:14px}
-.src-chart{display:flex;flex-direction:column;gap:9px}
-.src-row{display:grid;grid-template-columns:150px 1fr 72px;align-items:center;gap:10px}
-.src-label{font-size:.78rem;color:var(--text)}
-.src-bar-wrap{height:10px;background:var(--border);border-radius:5px;overflow:hidden}
-.src-bar{height:100%;border-radius:5px}
-.src-count{font-size:.8rem;font-weight:600;color:var(--text)}
-.src-pct{font-size:.72rem;font-weight:400;color:var(--muted)}
-.trend-chart{display:flex;align-items:flex-end;gap:3px;height:150px;padding-top:20px}
-.trend-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%}
-.trend-val{font-size:.65rem;font-weight:700;color:var(--blue);margin-bottom:3px}
-.trend-bar-wrap{flex:1;width:100%;display:flex;align-items:flex-end}
-.trend-bar{width:100%;background:var(--blue);border-radius:3px 3px 0 0;min-height:3px}
-.trend-lbl{font-size:.57rem;color:var(--muted);margin-top:4px;text-align:center;line-height:1.2;white-space:nowrap}
-.vendor-matrix{width:100%;border-collapse:collapse;font-size:.78rem}
-.vendor-matrix thead tr{background:#f4f5f7}
-.vendor-matrix th{padding:7px 5px;text-align:center;font-weight:600;color:var(--muted);border:1px solid var(--border);white-space:nowrap;font-size:.72rem}
-.vendor-matrix td{padding:5px 6px;border:1px solid #eee;text-align:center}
-.vendor-matrix .wk-th{min-width:52px}
-.vname{text-align:left!important;font-weight:500;white-space:nowrap;padding-left:10px!important}
-.vtotal{text-align:center!important;font-weight:700;color:var(--blue)}
-.vrow:hover td{background:rgba(0,82,204,.04)}
-.vrow-quota .vname{color:var(--blue)}
-.quota-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:5px;vertical-align:middle}
-.wk-cell{font-size:.75rem;font-weight:600;cursor:default}
-.c0{background:#fff;color:transparent}
-.c1{background:#e9f0ff;color:#0052cc}
-.c2{background:#d4e2ff;color:#0052cc}
-.c3{background:#b3ccff;color:#0052cc}
-.c4{background:#8ab3ff;color:#0047b3}
-.c5{background:#5c97ff;color:#fff}
-.c6{background:#3b7eff;color:#fff}
-.c7{background:#1a5fd4;color:#fff}
-.c8{background:#0747a6;color:#fff}
-.c9{background:#03306e;color:#fff}
-.vendor-matrix tr.hidden{display:none}
+
+/* ═════════ LEADERBOARD (Por Vendedor) ═════════ */
+.leaderboard{background:linear-gradient(135deg,#f0f7ff 0%,#eef2ff 100%);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 22px 20px;margin-bottom:18px;box-shadow:var(--shadow-sm);}
+.leaderboard .lb-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;gap:12px;flex-wrap:wrap;}
+.leaderboard .lb-eyebrow{font-size:.64rem;text-transform:uppercase;letter-spacing:1.1px;font-weight:700;color:var(--blue-500);}
+.leaderboard .lb-title{font-size:1.02rem;font-weight:700;color:var(--text);letter-spacing:-0.015em;margin-top:3px;}
+.leaderboard .lb-sub{font-size:.74rem;color:var(--text-muted);font-weight:500;}
+.leaderboard .lb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.lb-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow-xs);transition:transform .2s var(--ease),box-shadow .2s var(--ease);}
+.lb-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.lb-rank{font-size:1.5rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15));}
+.lb-body{flex:1;min-width:0;}
+.lb-name-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.lb-avatar{width:26px;height:26px;border-radius:50%;font-weight:700;font-size:.68rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lb-name{font-size:.82rem;font-weight:700;color:var(--text);letter-spacing:-0.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-metric{font-size:.78rem;color:var(--text-muted);margin-bottom:8px;}
+.lb-metric strong{color:var(--text);font-weight:700;font-size:.95rem;}
+.lb-metric-sub{opacity:.75;font-weight:500;}
+
+/* Vendor section header */
+.vendor-header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--shadow-xs);}
+.vendor-header .vh-left{display:flex;align-items:center;gap:12px;}
+.vendor-header .vh-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.92rem;flex-shrink:0;}
+.vendor-header .vh-name{font-size:1.12rem;font-weight:700;color:var(--text);letter-spacing:-0.015em;line-height:1.2;}
+.vendor-header .vh-meta{font-size:.74rem;color:var(--text-muted);margin-top:3px;}
+.vendor-header .vh-meta strong{color:var(--text);font-weight:700;}
+.vendor-header .vh-team-badge{display:inline-block;padding:2px 8px;border-radius:var(--r-pill);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:4px;}
+.vendor-header .vh-right .delta-chip{margin-left:0;font-size:.74rem;padding:5px 11px;}
+
+.section-title{font-size:.96rem;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-0.012em;}
+.section-sub{font-size:.76rem;color:var(--text-muted);margin-bottom:14px;}
+
+/* Quota attainment bar (for vendor leaderboard) */
+.quota-attainment{display:flex;align-items:center;gap:8px;}
+.quota-attainment .qa-bar{flex:1;height:6px;background:var(--ink-100);border-radius:var(--r-pill);overflow:hidden;min-width:60px;}
+.quota-attainment .qa-fill{height:100%;border-radius:var(--r-pill);background:var(--accent);transition:width .4s var(--ease);}
+.quota-attainment .qa-fill.attained{background:var(--green-500);}
+.quota-attainment .qa-fill.lagging{background:var(--amber-500);}
+.quota-attainment .qa-fill.critical{background:var(--red-500);}
+.quota-attainment .qa-val{font-size:.76rem;font-weight:700;color:var(--text);min-width:42px;text-align:right;}
+
+/* ═════════ SRC CHART (vendor sections) ═════════ */
+.src-chart{display:flex;flex-direction:column;gap:9px;}
+.src-row{display:grid;grid-template-columns:150px 1fr 72px;align-items:center;gap:10px;}
+.src-label{font-size:.78rem;color:var(--text);}
+.src-bar-wrap{height:8px;background:var(--ink-100);border-radius:var(--r-pill);overflow:hidden;}
+.src-bar{height:100%;border-radius:var(--r-pill);transition:width .4s var(--ease);}
+.src-count{font-size:.8rem;font-weight:600;color:var(--text);}
+.src-pct{font-size:.72rem;font-weight:400;color:var(--text-muted);}
+
+/* Trend chart */
+.trend-chart{display:flex;align-items:flex-end;gap:3px;height:150px;padding-top:20px;}
+.trend-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;transition:opacity .12s;}
+.trend-col:hover{opacity:.75;}
+.trend-val{font-size:.65rem;font-weight:700;color:var(--accent);margin-bottom:3px;}
+.trend-bar-wrap{flex:1;width:100%;display:flex;align-items:flex-end;}
+.trend-bar{width:100%;background:linear-gradient(180deg,var(--blue-400),var(--accent));border-radius:3px 3px 0 0;min-height:3px;}
+.trend-lbl{font-size:.57rem;color:var(--text-muted);margin-top:4px;text-align:center;line-height:1.2;white-space:nowrap;}
+
+/* ═════════ VENDOR MATRIX ═════════ */
+.vendor-matrix{width:100%;border-collapse:collapse;font-size:.78rem;}
+.vendor-matrix thead tr{background:var(--ink-50);}
+.vendor-matrix th{padding:9px 5px;text-align:center;font-weight:700;color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;font-size:.66rem;text-transform:uppercase;letter-spacing:.6px;}
+.vendor-matrix td{padding:6px 7px;border:1px solid var(--border-muted);text-align:center;}
+.vendor-matrix .wk-th{min-width:52px;}
+.vname{text-align:left!important;font-weight:500;white-space:nowrap;padding-left:12px!important;}
+.vtotal{text-align:center!important;font-weight:700;color:var(--accent);}
+.vrow:hover td{background:var(--blue-50);}
+.vrow-quota .vname{color:var(--accent);}
+.quota-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;}
+.wk-cell{font-size:.75rem;font-weight:600;cursor:default;}
+.c0{background:var(--surface);color:transparent;}
+.c1{background:var(--blue-50);color:var(--blue-500);}
+.c2{background:#d4e2ff;color:var(--blue-500);}
+.c3{background:#b3ccff;color:var(--blue-500);}
+.c4{background:#8ab3ff;color:#0047b3;}
+.c5{background:#5c97ff;color:#fff;}
+.c6{background:#3b7eff;color:#fff;}
+.c7{background:#1a5fd4;color:#fff;}
+.c8{background:var(--blue-600);color:#fff;}
+.c9{background:#03306e;color:#fff;}
+.vendor-matrix tr.hidden{display:none;}
+
+/* ═════════ DETALLE SEMANAL ═════════ */
 .detalle-layout{display:flex;gap:0;align-items:flex-start;min-height:calc(100vh - 160px);}
-.detalle-sidebar{width:190px;flex-shrink:0;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow-y:auto;max-height:calc(100vh - 160px);position:sticky;top:70px;margin-right:20px;}
-.detalle-sidebar-title{padding:12px 14px 8px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);}
-.week-sidebar-btn{display:block;width:100%;padding:10px 14px;border:none;background:none;cursor:pointer;text-align:left;font-size:.78rem;color:var(--muted);border-bottom:1px solid var(--border);transition:.12s;line-height:1.3;}
+.detalle-sidebar{width:200px;flex-shrink:0;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);overflow-y:auto;max-height:calc(100vh - 160px);position:sticky;top:70px;margin-right:20px;}
+.detalle-sidebar-title{padding:14px 16px 10px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--text-muted);border-bottom:1px solid var(--border-muted);}
+.week-sidebar-btn{display:block;width:100%;padding:11px 16px;border:none;background:none;cursor:pointer;text-align:left;font-size:.78rem;color:var(--text-muted);border-bottom:1px solid var(--border-muted);transition:.12s var(--ease);line-height:1.35;font-family:inherit;}
 .week-sidebar-btn:last-child{border-bottom:none;}
-.week-sidebar-btn:hover{background:#f4f5f7;color:var(--text);}
-.week-sidebar-btn.active{background:var(--blue-lt);color:var(--blue);font-weight:700;border-left:3px solid var(--blue);}
+.week-sidebar-btn:hover{background:var(--ink-50);color:var(--text);}
+.week-sidebar-btn.active{background:var(--blue-50);color:var(--accent);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);padding-left:13px;}
 .detalle-content{flex:1;min-width:0;}
+
+/* Week summary band */
+.week-summary{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:14px;padding:16px 22px;background:linear-gradient(180deg,var(--surface) 0%,#fafbfc 100%);border:1px solid var(--border);border-bottom:none;border-radius:var(--r-md) var(--r-md) 0 0;align-items:center;box-shadow:var(--shadow-xs);}
+.week-summary .ws-stat{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.week-summary .ws-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.9px;color:var(--text-muted);font-weight:700;}
+.week-summary .ws-value{font-size:1.1rem;font-weight:700;color:var(--text);letter-spacing:-0.012em;line-height:1.2;}
+.week-summary .ws-value .delta-chip{margin-left:0;font-size:.78rem;padding:3px 8px;}
+.week-summary .ws-sub{font-size:.68rem;color:var(--text-muted);line-height:1.3;}
+.week-summary .ws-divider{width:1px;height:42px;background:var(--border);align-self:center;}
+.week-summary .ws-trend .ws-value{font-size:1rem;}
+@media(max-width:1100px){.week-summary{grid-template-columns:1fr 1fr;gap:14px 22px;}.week-summary .ws-divider{display:none;}}
+
 #week-deal-table{width:100%;border-collapse:collapse;font-size:.82rem;}
-#week-deal-table th{padding:9px 12px;background:#f4f5f7;border:1px solid var(--border);font-weight:600;color:var(--muted);font-size:.76rem;text-align:left;}
-#week-deal-table td{padding:8px 12px;border:1px solid #eee;vertical-align:top;}
-#week-deal-table tr:hover td{background:rgba(0,82,204,.03);}
-.stage-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.72rem;font-weight:600;}
-.origen-tag{font-size:.75rem;color:var(--muted);}
+#week-deal-table th{padding:10px 14px;background:var(--ink-50);border-bottom:1px solid var(--border);font-weight:700;color:var(--text-muted);font-size:.66rem;text-align:left;text-transform:uppercase;letter-spacing:.6px;}
+#week-deal-table td{padding:10px 14px;border-bottom:1px solid var(--border-muted);vertical-align:middle;}
+#week-deal-table tbody tr:last-child td{border-bottom:none;}
+#week-deal-table tr{transition:background .12s var(--ease);}
+#week-deal-table tr:hover td{background:var(--surface-hover);}
+.stage-pill{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:.7rem;font-weight:700;letter-spacing:-0.005em;}
+.origen-tag{font-size:.74rem;color:var(--text-muted);}
+
+/* Focus rings for accessibility */
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r-sm);
+}
+/* Smoother scrollbars on webkit */
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:var(--ink-200);border-radius:var(--r-pill);border:2px solid var(--bg);}
+::-webkit-scrollbar-thumb:hover{background:var(--ink-300);}
+::-webkit-scrollbar-track{background:transparent;}
 /* === Mejoras UX: Pestaña Negocios === */
 .neg-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;flex-wrap:wrap}
 .neg-card-header .section-title{margin-bottom:2px}
@@ -723,6 +1017,7 @@ function applyDetallFilter() {
   if (!deals.length) {
     tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px">Sin negocios para esta semana</td></tr>';
     if (count) count.textContent = '0 negocios';
+    updateWeekSummary([], s => s || '—');
     return;
   }
 
@@ -740,6 +1035,60 @@ function applyDetallFilter() {
       <td class="origen-tag">${srcLbl(d.src)}</td>
     </tr>`).join('');
   if (count) count.textContent = deals.length + ' negocio' + (deals.length !== 1 ? 's' : '');
+
+  // Update week summary band
+  updateWeekSummary(deals, srcLbl);
+}
+
+function updateWeekSummary(deals, srcLbl){
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  // Totals
+  set('ws-total', deals.length);
+  set('ws-total-sub', deals.length === 1 ? '1 negocio creado' : deals.length + ' negocios creados');
+
+  // Top vendor
+  const vc = {};
+  deals.forEach(d => { vc[d.o] = (vc[d.o]||0)+1; });
+  const topV = Object.entries(vc).sort((a,b)=>b[1]-a[1])[0];
+  if (topV) {
+    const firstName = topV[0].split(' ')[0];
+    set('ws-top-vendor', firstName);
+    set('ws-top-vendor-sub', topV[1] + ' negocio' + (topV[1]!==1?'s':''));
+  } else { set('ws-top-vendor','—'); set('ws-top-vendor-sub','—'); }
+
+  // Top stage
+  const sc = {};
+  deals.forEach(d => { sc[d.s] = (sc[d.s]||0)+1; });
+  const topS = Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];
+  if (topS) { set('ws-top-stage', topS[0]); set('ws-top-stage-sub', topS[1] + ' negocio' + (topS[1]!==1?'s':'')); }
+  else { set('ws-top-stage','—'); set('ws-top-stage-sub','—'); }
+
+  // Top channel
+  const cc = {};
+  deals.forEach(d => { const l = srcLbl(d.src); cc[l] = (cc[l]||0)+1; });
+  const topC = Object.entries(cc).sort((a,b)=>b[1]-a[1])[0];
+  if (topC) { set('ws-top-channel', topC[0]); set('ws-top-channel-sub', topC[1] + ' negocio' + (topC[1]!==1?'s':'')); }
+  else { set('ws-top-channel','—'); set('ws-top-channel-sub','—'); }
+
+  // WoW: compare current week to previous week (ignore vendor filter for fairness)
+  const cur = _NG_DEALS.filter(d => d.wn === _currentWeekIdx).length;
+  const prev = _NG_DEALS.filter(d => d.wn === _currentWeekIdx - 1).length;
+  const wow = document.getElementById('ws-wow');
+  const wowSub = document.getElementById('ws-wow-sub');
+  if (wow) {
+    if (prev === 0) {
+      wow.textContent = '—';
+      wow.className = 'delta-chip delta-flat';
+      if (wowSub) wowSub.textContent = 'Sin datos previos';
+    } else {
+      const diff = cur - prev;
+      const pct = Math.round((diff / prev) * 100);
+      const sign = diff > 0 ? '+' : '';
+      wow.textContent = sign + pct + '%';
+      wow.className = 'delta-chip ' + (diff > 0 ? 'delta-up' : (diff < 0 ? 'delta-down' : 'delta-flat'));
+      if (wowSub) wowSub.textContent = sign + diff + ' vs sem. anterior (' + prev + ')';
+    }
+  }
 }
 
 /* ════════ NEGOCIOS · charts + matriz ordenable ════════ */
@@ -1104,6 +1453,48 @@ def build_html(data, update_time):
     kpi_pct = pct(fc, FORECAST_TARGET)
     gap     = FORECAST_TARGET - fc
 
+    # ── Q progress (day-of-quarter context for header band) ──────────────────
+    _today = datetime.date.today()
+    _q_start = datetime.date(2026, 4, 1)
+    _q_end   = datetime.date(2026, 6, 30)
+    _q_total = (_q_end - _q_start).days + 1
+    _q_day   = max(1, min(_q_total, (_today - _q_start).days + 1))
+    q_day_pct = round(_q_day * 100 / _q_total)
+    cw_pct    = pct(cw_t, 95000)
+    # Pace vs linear: if cw_pct >= q_day_pct → on track
+    pace_delta = cw_pct - q_day_pct
+    if pace_delta >= 0:
+        pace_label = f"+{pace_delta} pts vs ritmo lineal"
+        pace_cls   = "delta-up"
+    else:
+        pace_label = f"{pace_delta} pts vs ritmo lineal"
+        pace_cls   = "delta-down"
+
+    # ── Dashboard insights (headline facts for the Q2 insight strip) ─────────
+    _vendor_cw = sorted(
+        [(n, vendors[n]["cw"]) for n in vendors if vendors[n]["cw"] > 0],
+        key=lambda x: -x[1],
+    )
+    top_vendor_name = _vendor_cw[0][0] if _vendor_cw else "—"
+    top_vendor_cw   = _vendor_cw[0][1] if _vendor_cw else 0
+
+    _q2_months = [(m, months[m]) for m in ["Abril","Mayo","Junio"] if m in months]
+    if _q2_months:
+        _best_m = max(_q2_months, key=lambda kv: kv[1]["cw"])
+        best_month_name = _best_m[0]
+        best_month_cw   = _best_m[1]["cw"]
+    else:
+        best_month_name, best_month_cw = "—", 0
+
+    _active_deals_list = [x for x in deals if x["stage_id"] in PIPELINE_STAGES or x["stage_id"] in VERBAL_WIN]
+    avg_deal = int(sum(x["amount"] for x in _active_deals_list) / len(_active_deals_list)) if _active_deals_list else 0
+
+    # Linear projection: where will we land at current pace?
+    proj_cw_q2 = int(cw_t * _q_total / _q_day) if _q_day > 0 else 0
+    proj_vs_goal_pct = pct(proj_cw_q2, 95000)
+    proj_cls = "delta-up" if proj_cw_q2 >= 95000 else ("delta-flat" if proj_cw_q2 >= 95000*0.8 else "delta-down")
+    proj_arrow = "▲" if proj_cw_q2 >= 95000 else "▼"
+
     # ── TAB 1: Teams ─────────────────────────────────────────────────────────
     ent_fc    = ent["vw"] + ent["pipeline"] + ent["cw"]
     ter_fc    = ter["vw"] + ter["pipeline"] + ter["cw"]
@@ -1143,6 +1534,36 @@ def build_html(data, update_time):
     vendor_sidebar_html = []
     vendor_sections_html = []
 
+    # ── Leaderboard: top by quota attainment (CW / quota) ─────────────────────
+    _leaderboard = []
+    for _n in svend:
+        _q = QUOTAS[_n]
+        _att = pct(vendors[_n]["cw"], _q["quota"]) if _q["quota"] else 0
+        _leaderboard.append((_n, _att, vendors[_n]["cw"], _q))
+    _leaderboard.sort(key=lambda x: (-x[1], -x[2]))
+    top3 = _leaderboard[:3]
+    leaderboard_cards = []
+    rank_emoji = ["🥇", "🥈", "🥉"]
+    for rank_i, (ln, latt, lcw, lq) in enumerate(top3):
+        _tclr = "#0052cc" if lq["team"] == "Enterprise" else "#00875a"
+        _fill_cls = "attained" if latt >= 100 else ("lagging" if latt >= 60 else "critical")
+        leaderboard_cards.append(f"""
+      <div class="lb-card">
+        <div class="lb-rank">{rank_emoji[rank_i]}</div>
+        <div class="lb-body">
+          <div class="lb-name-row">
+            <span class="lb-avatar" style="background:{_tclr}18;color:{_tclr}">{lq["initials"]}</span>
+            <div class="lb-name">{ln}</div>
+          </div>
+          <div class="lb-metric"><strong>{usd(lcw)}</strong> <span class="lb-metric-sub">de {usd(lq["quota"])} cuota</span></div>
+          <div class="quota-attainment">
+            <div class="qa-bar"><div class="qa-fill {_fill_cls}" style="width:{min(latt,100)}%"></div></div>
+            <span class="qa-val">{latt}%</span>
+          </div>
+        </div>
+      </div>""")
+    leaderboard_html = "".join(leaderboard_cards)
+
     for i, name in enumerate(svend):
         q       = QUOTAS[name]
         vid     = q["id"]
@@ -1156,13 +1577,18 @@ def build_html(data, update_time):
         active_cls = "active" if i == 0 else ""
         team_clr   = "#0052cc" if team == "Enterprise" else "#00875a"
 
-        # Sidebar item
+        # Quota attainment for sidebar mini-bar
+        v_att = pct(v_cw, quota) if quota else 0
+        v_att_cls = "attained" if v_att >= 100 else ("lagging" if v_att >= 60 else "critical")
+
+        # Sidebar item — includes quota mini-bar below the name
         vendor_sidebar_html.append(
             f'<button class="sidebar-item {active_cls}" onclick="showVendor(\'{vid}\', this)">'
-            f'<span style="width:26px;height:26px;border-radius:50%;background:{team_clr}15;'
-            f'color:{team_clr};font-weight:700;font-size:.7rem;display:flex;align-items:center;'
-            f'justify-content:center;flex-shrink:0">{q["initials"]}</span>'
-            f'<span style="flex:1;text-align:left;font-size:.8rem">{name}</span>'
+            f'<span class="sb-avatar" style="background:{team_clr}18;color:{team_clr}">{q["initials"]}</span>'
+            f'<span class="sb-body">'
+            f'<span class="sb-name">{name}</span>'
+            f'<span class="sb-quota"><span class="sb-quota-bar"><span class="sb-quota-fill {v_att_cls}" style="width:{min(v_att,100)}%"></span></span><span class="sb-quota-val">{v_att}%</span></span>'
+            f'</span>'
             f'</button>'
         )
 
@@ -1193,13 +1619,31 @@ def build_html(data, update_time):
         tbid = f"vtbody-{vid}"
 
         section_display = "block" if i == 0 else "none"
+        # Vendor header chips
+        _v_att     = pct(v_cw, quota) if quota else 0
+        _v_cls     = "delta-up" if _v_att >= 100 else ("delta-flat" if _v_att >= 60 else "delta-down")
+        _v_arrow   = "▲" if _v_att >= 100 else ("●" if _v_att >= 60 else "▼")
+        _team_bg   = "var(--blue-50)" if team == "Enterprise" else "#e3fcef"
+        _team_fg   = "#0052cc" if team == "Enterprise" else "#006644"
         vendor_sections_html.append(f"""
 <div class="vendor-section" id="{vid}" style="display:{section_display}">
+  <div class="vendor-header">
+    <div class="vh-left">
+      <div class="vh-avatar" style="background:{team_clr}18;color:{team_clr}">{q["initials"]}</div>
+      <div>
+        <div class="vh-name">{name}</div>
+        <div class="vh-meta"><span class="vh-team-badge" style="background:{_team_bg};color:{_team_fg}">{team}</span> · Cuota Q2: <strong>{usd(quota)}</strong></div>
+      </div>
+    </div>
+    <div class="vh-right">
+      <span class="delta-chip {_v_cls}">{_v_arrow} {_v_att}% cumplido</span>
+    </div>
+  </div>
   <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px">
     <div class="kpi k-blue">
       <div class="kpi-label">🏆 Close Won</div>
       <div class="kpi-value">{usd(v_cw)}</div>
-      <div class="kpi-sub">Objetivo: {usd(quota)}</div>
+      <div class="kpi-sub">Objetivo: {usd(quota)} · <strong>{_v_att}%</strong></div>
     </div>
     <div class="kpi k-purple">
       <div class="kpi-label">⭐ Verbal Win</div>
@@ -1209,7 +1653,7 @@ def build_html(data, update_time):
     <div class="kpi k-teal">
       <div class="kpi-label">📦 Pipeline</div>
       <div class="kpi-value">{usd(v_pipe)}</div>
-      <div class="kpi-sub">Forecast total: {usd(v_fc)}</div>
+      <div class="kpi-sub">Forecast total: <strong>{usd(v_fc)}</strong></div>
     </div>
   </div>
   <div class="team-card" style="margin-bottom:14px">
@@ -1369,6 +1813,9 @@ def build_html(data, update_time):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Forecast Q2 2026 — MX Sales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>{CSS}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-date-fns/3.0.0/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -1377,14 +1824,32 @@ def build_html(data, update_time):
 
 <header class="header">
   <div>
-    <h1>📊 Forecast Q2 2026 — MX Sales</h1>
+    <div class="header-eyebrow"><span class="dot"></span>Mendel · MX Sales · Live</div>
+    <h1>Forecast Q2 2026</h1>
     <div class="header-meta">Abril · Mayo · Junio 2026 &nbsp;·&nbsp; Actualizado: {update_time}</div>
   </div>
   <div class="header-right">
-    <div style="font-size:.9rem;font-weight:700">Objetivo Q2</div>
-    <div style="font-size:1.3rem;font-weight:700">$95,000 USD</div>
+    <div class="hr-label">Objetivo Q2</div>
+    <div class="hr-value">$95,000 <span class="hr-unit">USD</span></div>
+    <div class="hr-sub">Close Won actual: {usd(cw_t)} · {cw_pct}%</div>
   </div>
 </header>
+
+<section class="q-progress">
+  <div class="qp-row">
+    <div class="qp-label"><strong>Día {_q_day} de {_q_total}</strong> del Q2 · {q_day_pct}% del trimestre transcurrido</div>
+    <div class="qp-delta"><span class="delta-chip {pace_cls}">{pace_label}</span></div>
+  </div>
+  <div class="qp-bar">
+    <div class="qp-fill" style="width:{q_day_pct}%"></div>
+    <div class="qp-marker" style="left:{cw_pct if cw_pct<=100 else 100}%" title="Close Won Q2: {cw_pct}%"></div>
+  </div>
+  <div class="qp-legend">
+    <span>01 Abr</span>
+    <span>15 May · punto medio</span>
+    <span>30 Jun</span>
+  </div>
+</section>
 
 <nav class="tab-bar">
   <button class="tab-btn active" onclick="showTab('overview')">📊 Dashboard Q2</button>
@@ -1396,26 +1861,61 @@ def build_html(data, update_time):
 <!-- ═══ TAB 1: OVERVIEW ═══ -->
 <main class="page active" id="overview">
 
+  <div class="insights-strip">
+    <div class="insight">
+      <div class="insight-icon">🎯</div>
+      <div class="insight-body">
+        <div class="insight-label">Proyección a cierre de Q2</div>
+        <div class="insight-val">{usd(proj_cw_q2)} <span class="delta-chip {proj_cls}">{proj_arrow} {proj_vs_goal_pct}% vs objetivo</span></div>
+        <div class="insight-sub">A ritmo actual de {usd(int(cw_t/_q_day))} USD/día</div>
+      </div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">🥇</div>
+      <div class="insight-body">
+        <div class="insight-label">Top vendedor (Close Won)</div>
+        <div class="insight-val">{top_vendor_name.split()[0] if top_vendor_name != '—' else '—'}</div>
+        <div class="insight-sub">{usd(top_vendor_cw)} cerrado en Q2</div>
+      </div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">📅</div>
+      <div class="insight-body">
+        <div class="insight-label">Mejor mes del Q2</div>
+        <div class="insight-val">{best_month_name}</div>
+        <div class="insight-sub">{usd(best_month_cw)} Close Won</div>
+      </div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">💼</div>
+      <div class="insight-body">
+        <div class="insight-label">Ticket promedio activo</div>
+        <div class="insight-val">{usd(avg_deal)}</div>
+        <div class="insight-sub">{len(_active_deals_list)} negocios en Pipeline + VW</div>
+      </div>
+    </div>
+  </div>
+
   <div class="kpi-grid">
     <div class="kpi k-blue">
       <div class="kpi-label">🏆 Close Won Q2</div>
       <div class="kpi-value">{usd(cw_t)}</div>
-      <div class="kpi-sub">Objetivo: $95,000 · {pct(cw_t, 95000)}% completado</div>
+      <div class="kpi-sub">Objetivo: $95,000 · <strong>{pct(cw_t, 95000)}%</strong> completado</div>
     </div>
     <div class="kpi k-purple">
       <div class="kpi-label">⭐ Verbal Win</div>
       <div class="kpi-value" style="color:var(--purple)">{usd(vw_t)}</div>
-      <div class="kpi-sub">RA&amp;D + Validación Interna · {len(d["vw_deals"])} negocios</div>
+      <div class="kpi-sub">RA&amp;D + Validación Interna · <strong>{len(d["vw_deals"])}</strong> negocios</div>
     </div>
     <div class="kpi k-teal">
       <div class="kpi-label">📦 Pipeline Activo</div>
       <div class="kpi-value">{usd(pipe_t)}</div>
-      <div class="kpi-sub">Discovery · Qualified · Negotiation · {len(d["pipe_deals"])} negocios</div>
+      <div class="kpi-sub">Discovery · Qualified · Negotiation · <strong>{len(d["pipe_deals"])}</strong> negocios</div>
     </div>
     <div class="kpi k-orange">
       <div class="kpi-label">Total Forecast vs 2× objetivo</div>
       <div class="kpi-value">{kpi_pct}%</div>
-      <div class="kpi-sub">{usd(fc)} / {usd(FORECAST_TARGET)} · Brecha: {usd(gap)}</div>
+      <div class="kpi-sub">{usd(fc)} / {usd(FORECAST_TARGET)} · Brecha: <strong>{usd(gap)}</strong></div>
     </div>
   </div>
 
@@ -1574,6 +2074,18 @@ def build_html(data, update_time):
 
 <!-- ═══ TAB 2: POR VENDEDOR ═══ -->
 <main class="page" id="vendors">
+
+  <section class="leaderboard">
+    <div class="lb-header">
+      <div>
+        <div class="lb-eyebrow">Leaderboard</div>
+        <div class="lb-title">Top 3 del Q2 por cumplimiento de cuota</div>
+      </div>
+      <div class="lb-sub">Cuota total del equipo: {usd(sum(q['quota'] for q in QUOTAS.values()))}</div>
+    </div>
+    <div class="lb-grid">{leaderboard_html}</div>
+  </section>
+
   <div class="vendor-layout">
     <nav class="vendor-sidebar">
 {vendor_sidebar_final}
@@ -1686,7 +2198,38 @@ def build_html(data, update_time):
 {week_btns_html}
     </nav>
     <div class="detalle-content">
-      <div class="table-wrap">
+      <div class="week-summary" id="week-summary">
+        <div class="ws-stat">
+          <div class="ws-label">Negocios creados</div>
+          <div class="ws-value" id="ws-total">—</div>
+          <div class="ws-sub" id="ws-total-sub">En la semana seleccionada</div>
+        </div>
+        <div class="ws-divider"></div>
+        <div class="ws-stat">
+          <div class="ws-label">Top vendedor</div>
+          <div class="ws-value" id="ws-top-vendor">—</div>
+          <div class="ws-sub" id="ws-top-vendor-sub">—</div>
+        </div>
+        <div class="ws-divider"></div>
+        <div class="ws-stat">
+          <div class="ws-label">Etapa principal</div>
+          <div class="ws-value" id="ws-top-stage">—</div>
+          <div class="ws-sub" id="ws-top-stage-sub">—</div>
+        </div>
+        <div class="ws-divider"></div>
+        <div class="ws-stat">
+          <div class="ws-label">Canal principal</div>
+          <div class="ws-value" id="ws-top-channel">—</div>
+          <div class="ws-sub" id="ws-top-channel-sub">—</div>
+        </div>
+        <div class="ws-divider"></div>
+        <div class="ws-stat ws-trend">
+          <div class="ws-label">vs semana anterior</div>
+          <div class="ws-value"><span class="delta-chip" id="ws-wow">—</span></div>
+          <div class="ws-sub" id="ws-wow-sub">—</div>
+        </div>
+      </div>
+      <div class="table-wrap" style="border-radius:0 0 var(--r-md) var(--r-md);border-top:none">
         <div class="table-toolbar">
           <h3>🗓️ <span id="detalle-week-title">{init_lbl}</span></h3>
           <div class="toolbar-right">
