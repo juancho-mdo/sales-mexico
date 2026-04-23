@@ -80,6 +80,92 @@ ORIGIN_MAP = {
     "Por Definir":          "Por Definir",
 }
 
+# ─── Compromisos del Q2 (tracking manual) ─────────────────────────────────────
+# Actualizar semanalmente según avance.
+#   status: "pending" | "progress" | "done"
+#   progress: 0-100 (%)
+#   note: opcional — contexto/avance
+COMPROMISOS_Q = [
+    {"name": "Manon", "initials": "MN", "commitments": [
+        {"text": "Cumplir el 100% del objetivo de cuentas en el Q",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Primer cierre propio",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Mariel", "initials": "MA", "commitments": [
+        {"text": "10 contactos diarios para generación de leads",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "3 contactos en cada deal",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Lili", "initials": "LI", "commitments": [
+        {"text": "Implementar sistema de prospección con Claude para sacar 5 leads nuevos por semana",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Cerrar 2–3 cuentas estratégicas con fee $500–$750",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Pato", "initials": "PF", "commitments": [
+        {"text": "Disciplina diaria: redactar el win de cada día (evidencia)",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "1 cuenta cerrada con apoyo de Pato junto a alguien nuevo del equipo",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Juancho", "initials": "JM", "commitments": [
+        {"text": "Cerrar Casa Lumbre",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Equipo Enterprise llega a la cuota total, con cuota propia de 10K",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Gil", "initials": "GV", "commitments": [
+        {"text": "Cerrar LALA",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Que Marce y Andre logren 2K en su primer Q",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Checo", "initials": "SR", "commitments": [
+        {"text": "Cerrar Hitec cobrando (negocio completo)",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "1 núcleo de trabajo operativo",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Agus", "initials": "AM", "commitments": [
+        {"text": "Cumplir cuota mensual en el Q",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "3 cierres de travel",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Lucho", "initials": "LU", "commitments": [
+        {"text": "Cerrar 2 cuentas propias",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "5 partners nuevos con +3 referidos",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Fer", "initials": "FM", "commitments": [
+        {"text": "Propuestas enviadas en las primeras 24 hrs post demo · seguimiento en verde de todas mis cuentas",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Cerrar Qualitas",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Foi", "initials": "FO", "commitments": [
+        {"text": "Cerrar una nueva cuenta enterprise +3K",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "1 cierre de travel",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Andre", "initials": "AT", "commitments": [
+        {"text": "3 ventas / llegar a mi cuota",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Proceso de prospección automatizado",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+    {"name": "Joe", "initials": "JC", "commitments": [
+        {"text": "Terminar el Q al 120%",
+         "progress": 0, "status": "pending", "note": ""},
+        {"text": "Cerrar 1 cuenta con fee de +6K",
+         "progress": 0, "status": "pending", "note": ""},
+    ]},
+]
+
 # ─── HubSpot API ──────────────────────────────────────────────────────────────
 
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json"}
@@ -903,6 +989,122 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{
   .header{padding:16px;}
   .tab-bar{padding:0 16px;}
 }
+
+/* ═════════ COMPROMISOS Q ═════════ */
+.compromisos-hero{
+  background:linear-gradient(135deg,#0b1d3d 0%,#142b5e 55%,#1e3a8a 100%);
+  border-radius:var(--r-lg);padding:22px 26px;color:#fff;
+  margin-bottom:18px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+.compromisos-hero::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(900px 220px at 95% -30%,rgba(38,132,255,.30),transparent);
+  pointer-events:none;
+}
+.compromisos-hero .ch-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;position:relative;z-index:1;flex-wrap:wrap;}
+.compromisos-hero .ch-left{flex:1;min-width:260px;}
+.compromisos-hero .ch-eyebrow{font-size:.66rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;opacity:.7;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.compromisos-hero .ch-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#5aff9f;box-shadow:0 0 0 3px rgba(90,255,159,.18);}
+.compromisos-hero h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.15;}
+.compromisos-hero p{font-size:.82rem;opacity:.78;max-width:620px;line-height:1.55;}
+.compromisos-hero .ch-right{text-align:right;min-width:180px;}
+.compromisos-hero .ch-pct{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;}
+.compromisos-hero .ch-pct-label{font-size:.68rem;opacity:.65;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-top:4px;}
+.compromisos-hero .ch-bar{height:8px;background:rgba(255,255,255,.12);border-radius:99px;margin-top:14px;overflow:hidden;position:relative;z-index:1;}
+.compromisos-hero .ch-bar-fill{height:100%;background:linear-gradient(90deg,#36b37e,#00b8d9);border-radius:99px;transition:width .7s var(--ease);box-shadow:0 0 14px rgba(54,179,126,.4);}
+.compromisos-hero .ch-stats{display:flex;gap:20px;margin-top:12px;font-size:.75rem;position:relative;z-index:1;flex-wrap:wrap;}
+.compromisos-hero .ch-stat{display:flex;align-items:center;gap:6px;opacity:.82;}
+.compromisos-hero .ch-stat strong{color:#fff;font-weight:700;opacity:1;font-variant-numeric:tabular-nums;}
+.compromisos-hero .ch-dot{width:8px;height:8px;border-radius:50%;}
+.compromisos-hero .ch-dot.d-done{background:#5aff9f;}
+.compromisos-hero .ch-dot.d-prog{background:#ffd24d;}
+.compromisos-hero .ch-dot.d-pend{background:rgba(255,255,255,.35);}
+
+.compromisos-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.comp-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--shadow-xs);display:flex;align-items:center;gap:12px;transition:box-shadow .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);}
+.comp-sum:hover{box-shadow:var(--shadow-sm);border-color:var(--ink-300);transform:translateY(-1px);}
+.comp-sum-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.comp-sum-icon.i-blue{background:var(--blue-50);color:var(--blue-500);}
+.comp-sum-icon.i-green{background:var(--green-100);color:var(--green-500);}
+.comp-sum-icon.i-amber{background:var(--amber-100);color:var(--amber-600);}
+.comp-sum-icon.i-purple{background:var(--purple-50);color:var(--purple-500);}
+.comp-sum-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);font-weight:700;margin-bottom:2px;}
+.comp-sum-val{font-size:1.5rem;font-weight:700;line-height:1.1;letter-spacing:-.022em;color:var(--text);}
+.comp-sum-sub{font-size:.68rem;color:var(--text-muted);margin-top:2px;line-height:1.35;}
+
+.comp-filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.comp-filter-btn{padding:7px 14px;font-size:.75rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);letter-spacing:-.005em;display:inline-flex;align-items:center;gap:6px;}
+.comp-filter-btn:hover{border-color:var(--ink-400);color:var(--text);}
+.comp-filter-btn.active{background:var(--blue-500);border-color:var(--blue-500);color:#fff;box-shadow:0 2px 4px rgba(0,82,204,.15);}
+.comp-filter-btn .count{display:inline-block;padding:1px 7px;border-radius:99px;background:rgba(9,30,66,.07);font-size:.66rem;font-weight:700;min-width:20px;text-align:center;}
+.comp-filter-btn.active .count{background:rgba(255,255,255,.22);color:#fff;}
+.comp-filter-btn.f-done{color:var(--green-600);}
+.comp-filter-btn.f-done.active{background:var(--green-500);border-color:var(--green-500);color:#fff;}
+.comp-filter-btn.f-progress{color:var(--amber-600);}
+.comp-filter-btn.f-progress.active{background:var(--amber-500);border-color:var(--amber-500);color:#fff;}
+
+.compromisos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px;}
+
+.vendor-comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:0;box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease);display:flex;flex-direction:column;}
+.vendor-comp-card:hover{box-shadow:var(--shadow-md);border-color:var(--ink-300);transform:translateY(-1px);}
+.vendor-comp-card.is-complete{border-color:var(--green-400);box-shadow:0 0 0 1px var(--green-400),var(--shadow-sm);}
+.vendor-comp-card.is-hidden{display:none;}
+
+.vc-header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-muted);background:linear-gradient(180deg,var(--ink-25),var(--surface));}
+.vc-avatar{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue-500),var(--blue-400));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;letter-spacing:.01em;flex-shrink:0;box-shadow:0 2px 6px rgba(0,82,204,.22);}
+.vc-avatar.av-done{background:linear-gradient(135deg,var(--green-500),var(--green-400));box-shadow:0 2px 6px rgba(0,135,90,.22);}
+.vc-avatar.av-progress{background:linear-gradient(135deg,var(--amber-500),#ffb84d);box-shadow:0 2px 6px rgba(255,153,31,.22);}
+.vc-avatar.av-zero{background:linear-gradient(135deg,#8993a4,#b3bac5);box-shadow:none;}
+.vc-head-text{min-width:0;flex:1;}
+.vc-name{font-size:1rem;font-weight:700;letter-spacing:-.01em;color:var(--text);line-height:1.15;}
+.vc-meta{font-size:.7rem;color:var(--text-muted);margin-top:2px;font-weight:500;}
+.vc-pct{margin-left:auto;font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums;}
+.vc-pct.done{color:var(--green-500);}
+.vc-pct.zero{color:var(--text-subtle);}
+.vc-pct.progress{color:var(--amber-600);}
+
+.vc-progress{height:4px;background:var(--ink-100);}
+.vc-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue-500),var(--teal-500));transition:width .5s var(--ease);}
+.vc-progress-fill.done{background:linear-gradient(90deg,var(--green-500),var(--green-400));}
+.vc-progress-fill.progress{background:linear-gradient(90deg,var(--amber-500),#ffb84d);}
+
+.vc-body{padding:4px 16px 14px;flex:1;}
+.comp-item{padding:13px 0;border-top:1px dashed var(--border-muted);display:flex;gap:12px;align-items:flex-start;}
+.comp-item:first-child{border-top:none;}
+.comp-item.is-hidden{display:none;}
+
+.comp-check{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;border:2px solid var(--ink-200);background:var(--surface);color:var(--text-subtle);margin-top:1px;transition:all .2s var(--ease);}
+.comp-check.done{background:var(--green-500);border-color:var(--green-500);color:#fff;}
+.comp-check.progress{background:var(--amber-100);border-color:var(--amber-500);color:var(--amber-600);}
+
+.comp-body{flex:1;min-width:0;}
+.comp-text{font-size:.82rem;line-height:1.48;color:var(--text);font-weight:500;}
+.comp-text.done{color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--green-400);text-decoration-thickness:1.5px;}
+
+.comp-chip-row{display:flex;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap;}
+.comp-status-chip{display:inline-flex;align-items:center;gap:4px;font-size:.64rem;padding:2px 8px;border-radius:99px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+.comp-status-chip.pending{background:var(--ink-100);color:var(--ink-500);}
+.comp-status-chip.progress{background:var(--amber-100);color:var(--amber-600);}
+.comp-status-chip.done{background:var(--green-100);color:var(--green-600);}
+.comp-mini-bar{flex:1;max-width:140px;min-width:60px;height:4px;background:var(--ink-100);border-radius:99px;overflow:hidden;}
+.comp-mini-fill{height:100%;background:linear-gradient(90deg,var(--amber-500),#ffb84d);transition:width .5s var(--ease);}
+.comp-mini-fill.done{background:var(--green-500);}
+.comp-pct{font-size:.72rem;font-weight:700;color:var(--text-muted);font-variant-numeric:tabular-nums;min-width:36px;text-align:right;}
+.comp-pct.done{color:var(--green-600);}
+.comp-pct.progress{color:var(--amber-600);}
+
+.comp-note{margin-top:7px;font-size:.72rem;color:var(--text);padding:7px 10px;background:var(--blue-50);border-left:2px solid var(--blue-400);border-radius:0 var(--r-xs) var(--r-xs) 0;line-height:1.45;}
+.comp-note::before{content:"💬 ";opacity:.8;margin-right:3px;}
+
+.comp-empty{padding:32px;text-align:center;color:var(--text-muted);font-size:.85rem;background:var(--surface);border:1px dashed var(--border);border-radius:var(--r-md);grid-column:1/-1;}
+
+@media(max-width:900px){
+  .compromisos-summary{grid-template-columns:repeat(2,1fr);}
+  .compromisos-grid{grid-template-columns:1fr;}
+  .compromisos-hero .ch-row{flex-direction:column;align-items:flex-start;gap:12px;}
+  .compromisos-hero .ch-right{text-align:left;}
+}
 """
 
 STATIC_JS = r"""
@@ -918,6 +1120,21 @@ function showVendor(vid, btn) {
   document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
   document.getElementById(vid).style.display = 'block';
   if (btn) btn.classList.add('active');
+}
+
+function filterCompromisos(status, btn) {
+  document.querySelectorAll('.comp-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.vendor-comp-card').forEach(card => {
+    const items = card.querySelectorAll('.comp-item');
+    let visible = 0;
+    items.forEach(it => {
+      const match = (status === 'all') || (it.dataset.status === status);
+      it.classList.toggle('is-hidden', !match);
+      if (match) visible++;
+    });
+    card.classList.toggle('is-hidden', visible === 0);
+  });
 }
 
 function filterOverview() {
@@ -1424,6 +1641,161 @@ document.addEventListener('DOMContentLoaded', function() {
 """
 
 
+def build_compromisos_section():
+    """Construye la pestaña de Compromisos del Q (tracking manual)."""
+    STATUS_LABEL = {"pending": "Pendiente", "progress": "En curso", "done": "Cumplido"}
+    STATUS_ICON  = {"pending": "", "progress": "◐", "done": "✓"}
+
+    total_items    = sum(len(v["commitments"]) for v in COMPROMISOS_Q)
+    done_items     = sum(1 for v in COMPROMISOS_Q for c in v["commitments"] if c["status"] == "done")
+    progress_items = sum(1 for v in COMPROMISOS_Q for c in v["commitments"] if c["status"] == "progress")
+    pending_items  = total_items - done_items - progress_items
+
+    # Cumplimiento ponderado (promedio de progresos 0-100)
+    sum_progress = sum(c["progress"] for v in COMPROMISOS_Q for c in v["commitments"])
+    weighted_pct = round(sum_progress / total_items) if total_items else 0
+    done_pct     = round(done_items * 100 / total_items) if total_items else 0
+
+    vendor_cards = []
+    for v in COMPROMISOS_Q:
+        n_commit = len(v["commitments"])
+        n_done   = sum(1 for c in v["commitments"] if c["status"] == "done")
+        n_prog   = sum(1 for c in v["commitments"] if c["status"] == "progress")
+        v_sum    = sum(c["progress"] for c in v["commitments"])
+        v_pct    = round(v_sum / n_commit) if n_commit else 0
+
+        card_cls = "is-complete" if (n_done == n_commit and n_commit > 0) else ""
+        if n_done == n_commit and n_commit > 0:
+            av_cls, pct_cls, fill_cls = "av-done", "done", "done"
+        elif n_prog > 0 or v_pct > 0:
+            av_cls, pct_cls, fill_cls = "av-progress", "progress", "progress"
+        else:
+            av_cls, pct_cls, fill_cls = "av-zero", "zero", ""
+
+        meta_txt = f"{n_done}/{n_commit} cumplidos"
+        if n_prog:
+            meta_txt += f" · {n_prog} en curso"
+
+        items_html = []
+        for c in v["commitments"]:
+            s         = c["status"]
+            icon      = STATUS_ICON[s]
+            label     = STATUS_LABEL[s]
+            text_cls  = "done" if s == "done" else ""
+            pct_cls_i = "done" if s == "done" else ("progress" if s == "progress" else "")
+
+            mini_fill_cls = "done" if s == "done" else ""
+            mini_bar = (
+                f'<div class="comp-mini-bar"><div class="comp-mini-fill {mini_fill_cls}" '
+                f'style="width:{c["progress"]}%"></div></div>'
+            ) if s != "pending" else ""
+
+            note_html = f'<div class="comp-note">{c["note"]}</div>' if c.get("note") else ""
+
+            items_html.append(
+                f'<div class="comp-item" data-status="{s}">'
+                f'<div class="comp-check {s}">{icon}</div>'
+                f'<div class="comp-body">'
+                f'<div class="comp-text {text_cls}">{c["text"]}</div>'
+                f'<div class="comp-chip-row">'
+                f'<span class="comp-status-chip {s}">{label}</span>'
+                f'{mini_bar}'
+                f'<span class="comp-pct {pct_cls_i}">{c["progress"]}%</span>'
+                f'</div>'
+                f'{note_html}'
+                f'</div>'
+                f'</div>'
+            )
+
+        vendor_cards.append(
+            f'<div class="vendor-comp-card {card_cls}">'
+            f'<div class="vc-header">'
+            f'<div class="vc-avatar {av_cls}">{v["initials"]}</div>'
+            f'<div class="vc-head-text">'
+            f'<div class="vc-name">{v["name"]}</div>'
+            f'<div class="vc-meta">{meta_txt}</div>'
+            f'</div>'
+            f'<div class="vc-pct {pct_cls}">{v_pct}%</div>'
+            f'</div>'
+            f'<div class="vc-progress"><div class="vc-progress-fill {fill_cls}" style="width:{v_pct}%"></div></div>'
+            f'<div class="vc-body">{"".join(items_html)}</div>'
+            f'</div>'
+        )
+
+    return f"""
+<main class="page" id="compromisos">
+
+  <div class="compromisos-hero">
+    <div class="ch-row">
+      <div class="ch-left">
+        <div class="ch-eyebrow"><span class="dot"></span>Compromisos de equipo · Q2 2026</div>
+        <h2>🎯 Compromisos del Q con el equipo</h2>
+        <p>Objetivos personales acordados por cada vendedor para este trimestre. Se palomean semanalmente conforme vayan cumpliendo. Celebremos avances, no solo cierres.</p>
+      </div>
+      <div class="ch-right">
+        <div class="ch-pct">{weighted_pct}%</div>
+        <div class="ch-pct-label">Cumplimiento ponderado</div>
+      </div>
+    </div>
+    <div class="ch-bar"><div class="ch-bar-fill" style="width:{weighted_pct}%"></div></div>
+    <div class="ch-stats">
+      <span class="ch-stat"><span class="ch-dot d-done"></span><strong>{done_items}</strong> cumplidos · {done_pct}%</span>
+      <span class="ch-stat"><span class="ch-dot d-prog"></span><strong>{progress_items}</strong> en curso</span>
+      <span class="ch-stat"><span class="ch-dot d-pend"></span><strong>{pending_items}</strong> pendientes</span>
+      <span class="ch-stat"><strong>{total_items}</strong> compromisos totales · <strong>{len(COMPROMISOS_Q)}</strong> vendedores</span>
+    </div>
+  </div>
+
+  <div class="compromisos-summary">
+    <div class="comp-sum">
+      <div class="comp-sum-icon i-blue">👥</div>
+      <div>
+        <div class="comp-sum-label">Vendedores</div>
+        <div class="comp-sum-val">{len(COMPROMISOS_Q)}</div>
+        <div class="comp-sum-sub">con compromisos activos</div>
+      </div>
+    </div>
+    <div class="comp-sum">
+      <div class="comp-sum-icon i-purple">📝</div>
+      <div>
+        <div class="comp-sum-label">Total Compromisos</div>
+        <div class="comp-sum-val">{total_items}</div>
+        <div class="comp-sum-sub">definidos para el Q2</div>
+      </div>
+    </div>
+    <div class="comp-sum">
+      <div class="comp-sum-icon i-amber">⚡</div>
+      <div>
+        <div class="comp-sum-label">En Curso</div>
+        <div class="comp-sum-val">{progress_items}</div>
+        <div class="comp-sum-sub">con avance parcial</div>
+      </div>
+    </div>
+    <div class="comp-sum">
+      <div class="comp-sum-icon i-green">✓</div>
+      <div>
+        <div class="comp-sum-label">Cumplidos</div>
+        <div class="comp-sum-val">{done_items}</div>
+        <div class="comp-sum-sub">completados al 100%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-filters">
+    <button class="comp-filter-btn active" onclick="filterCompromisos('all', this)">Todos <span class="count">{total_items}</span></button>
+    <button class="comp-filter-btn" onclick="filterCompromisos('pending', this)">Pendientes <span class="count">{pending_items}</span></button>
+    <button class="comp-filter-btn f-progress" onclick="filterCompromisos('progress', this)">En curso <span class="count">{progress_items}</span></button>
+    <button class="comp-filter-btn f-done" onclick="filterCompromisos('done', this)">Cumplidos <span class="count">{done_items}</span></button>
+  </div>
+
+  <div class="compromisos-grid">
+    {"".join(vendor_cards)}
+  </div>
+
+</main>
+"""
+
+
 def build_html(data, update_time):
     d          = data
     vw_t       = d["vw_t"]
@@ -1856,6 +2228,7 @@ def build_html(data, update_time):
   <button class="tab-btn" onclick="showTab('vendors')">👤 Por Vendedor</button>
   <button class="tab-btn" onclick="showTab('negocios')">📋 Negocios</button>
   <button class="tab-btn" onclick="showTab('detalle')">🗓️ Detalle Semanal</button>
+  <button class="tab-btn" onclick="showTab('compromisos')">🎯 Compromisos Q</button>
 </nav>
 
 <!-- ═══ TAB 1: OVERVIEW ═══ -->
@@ -2257,6 +2630,8 @@ def build_html(data, update_time):
     </div>
   </div>
 </main>
+
+{build_compromisos_section()}
 
 <script>
 const _NG_DEALS = {ng_json};
